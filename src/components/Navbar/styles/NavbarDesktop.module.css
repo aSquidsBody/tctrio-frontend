@@ -1,0 +1,51 @@
+/* Common component class for navbar */
+.component {
+  position: relative;
+  width: 100%;
+  height: var(--menu-height);
+  background-color: var(--primary-color);
+}
+
+/* Wrap the entire menu */
+.menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* The logo on the nav bar */
+.signature {
+  max-height: 100px;
+  max-width: 150px;
+}
+
+/* Menu (in the navbar for desktop) */
+.menu ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.listItem {
+  list-style: none;
+  padding: 1rem;
+}
+
+.link {
+  font-size: 1.4rem;
+  font-family: var(--header-font);
+  color: var(--white-color);
+}
+
+.link:hover {
+  opacity: 0.5;
+}

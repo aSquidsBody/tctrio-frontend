@@ -1,0 +1,91 @@
+.component {
+  position: relative;
+}
+
+.form {
+  margin: auto;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row,
+.box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 5px;
+  justify-content: center;
+}
+
+.row {
+  justify-content: space-between;
+}
+
+.pairMember {
+  width: 48%;
+}
+
+.lineInput {
+  width: 100%;
+}
+
+@media screen and (max-width: 650px) {
+  .row,
+  .box {
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .pairMember {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .lineInput,
+  .box {
+    margin: 10px 0px;
+  }
+}
+
+input,
+textarea,
+.button {
+  font-family: var(--alternate-font);
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+input,
+textarea {
+  padding: 5px 13px;
+  width: 100%;
+}
+
+textarea {
+  min-height: 250px;
+  resize: none;
+}
+
+.submit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  width: 30%;
+  min-width: 122px;
+  background: var(--primary-color);
+  color: var(--white-color);
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}

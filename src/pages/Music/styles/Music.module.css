@@ -1,0 +1,59 @@
+.component {
+  position: relative;
+}
+
+.component li {
+  position: relative;
+  list-style: none;
+}
+
+.banner {
+  position: relative;
+  height: 280px;
+  width: 100vw;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: var(--primary-color);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.albums {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.videos {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.videos .title {
+  color: white;
+}
+
+.videos .bar {
+  background: white;
+}
+
+.videos::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 25%;
+  top: 40px;
+  left: -50%;
+  background: var(--primary-color);
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  z-index: -1;
+}

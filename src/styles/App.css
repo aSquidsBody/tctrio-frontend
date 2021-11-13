@@ -1,0 +1,161 @@
+@font-face {
+  font-family: "ClaxtonBold";
+  src: local("ClaxtonBold"),
+    url("../assets/fonts/Claxton-Bold.otf") format("opentype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "ClaxtonLight";
+  src: local("ClaxtonLight"),
+    url("../assets/fonts/Claxton-Light.otf") format("opentype");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Claxton";
+  src: local("Claxton"), url("../assets/fonts/Claxton.otf") format("opentype");
+}
+
+:root {
+  --header-font-bold: "ClaxtonBold";
+  --header-font: "Claxton";
+  --body-font: "ClaxtonLight";
+  /* --cursive-font: "Pacifico", cursive; */
+  --cursive-font: "Merienda", cursive;
+  /* --cursive-font: "Permanent Marker", cursive; */
+  /* --cursive-font: "Satisfy", cursive; */
+
+  --alternate-font: "Karla", sans-serif;
+
+  --menu-font: "Slabo 27px", serif;
+
+  --menu-height: 60px;
+
+  --primary-color: #1c2434;
+
+  --gold-gradient: linear-gradient(0.25turn, gold, white);
+
+  --menu-speed: 0.75s;
+
+  /* --white-color: #1c2434; */
+  --white-color: rgb(248, 248, 244);
+  /* --white-color: rgb(102, 102, 105); */
+  --bwite-color: rgb(208, 208, 214);
+
+  --website-width: 1480px;
+
+  --white: #f4f4f4;
+  --black: #000;
+
+  --spotify-grey: rgb(62, 62, 63);
+
+  --spotify-green: rgb(30, 215, 96);
+  --spotify-gradient: linear-gradient(
+    0.25turn,
+    var(--spotify-green),
+    var(--spotify-grey)
+  );
+
+  --desktop-album-width: 260px;
+  --mobile-album-width: 160px;
+
+  --vice-blue: #0bd3d3;
+  --vice-pink: #f890e7;
+
+  overflow-y: scroll;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.body,
+.newBody {
+  position: relative;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: linear-gradient(0.3turn, var(--white-color), var(--bwite-color));
+  mix-blend-mode: difference;
+}
+
+.body::before,
+.newBody::before {
+  content: "";
+  position: absolute;
+  display: block;
+  background-image: url("../assets/logo_black.png");
+  background-size: 33%;
+  opacity: 0.03;
+  transform: rotate(5deg);
+  height: 100%;
+  width: 100%;
+  /* z-index: -1; */
+}
+
+@media screen and (max-width: 650px) {
+  .newBody {
+    padding-top: var(--menu-height);
+  }
+}
+
+.separation-bar__black {
+  background-color: var(--black);
+  width: 80px;
+  height: 5px;
+}
+
+.cursive {
+  font-family: var(--cursive-font);
+}
+
+.header-font {
+  font-family: var(--header-font);
+}
+
+.margin-5 {
+  margin: 5px;
+}
+
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px;
+}
+
+.container {
+  max-width: var(--website-width);
+  margin: auto;
+}
+
+/* Space needed to keep the menu from overlapping with other stuff */
+.space {
+  height: var(--header-height);
+  width: 100%;
+}

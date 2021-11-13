@@ -1,0 +1,171 @@
+/* DESKTOP */
+.desktopComponentRow,
+.desktopComponentColumn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.desktopComponentColumn {
+  flex-direction: column;
+  width: 70%;
+  max-width: 600px;
+  margin: auto;
+  background: radial-gradient(#575757, 58%, #262626);
+  padding: 20px;
+  margin-top: 4px;
+  border-radius: 10px;
+  color: var(--white-color);
+}
+
+/* Wraps the album cover and info */
+.desktopDescription {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(var(--desktop-album-width) + 20px);
+}
+
+.innerDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 40px 0px 30px 0px;
+}
+
+.innerDescription .infoDesktop {
+  width: 100%;
+}
+
+.innerDescription .infoDesktop .name {
+  font-size: 1.5rem;
+}
+
+.albumDesktop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--desktop-album-width) + 20px);
+  width: calc(var(--desktop-album-width) + 20px);
+  margin-right: 15px;
+}
+
+.desktopPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px;
+}
+
+.spotifyLink {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.linkHeader {
+  font-family: var(--header-font);
+  font-size: 1.2rem;
+  margin: auto;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.infoDesktop {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.dateDesktop {
+  font-family: var(--body-font);
+  font-size: 1.2rem;
+}
+
+.albumCoverDesktop,
+.albumCoverMobile {
+  border: solid 2px gray;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.815);
+}
+
+.albumCoverDesktop {
+  width: var(--desktop-album-width);
+  height: var(--desktop-album-width);
+}
+
+.albumCoverMobile {
+  width: var(--mobile-album-width);
+  height: var(--mobile-album-width);
+}
+
+/* MOBILE */
+.mobileComponent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  width: 75%;
+  height: auto;
+}
+
+.albumWrapper {
+  position: relative;
+  width: 160px;
+  height: 190px;
+}
+
+.button:checked + .spotifyWrapper > iframe > #document {
+  visibility: hidden;
+}
+
+.toggle {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: calc(100% - 30px);
+  width: 100%;
+  opacity: 0;
+}
+
+.toggle:checked + .preview {
+  visibility: visible;
+  transform: translateY(40px);
+  transition: transform 0.1s linear, visibility 0.1s linear 0.05s;
+}
+
+.preview {
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+  width: 160px;
+  height: 30px;
+  visibility: hidden;
+  transition: transform 0.1s linear 0.075s, visibility 0.1s ease-out;
+}
+
+.infoMobile {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 0% 10%;
+}
+
+.dateMobile {
+  padding: 20% 0%;
+  font-family: var(--body-font);
+  font-size: 1.2rem;
+}
+
+/* Generic */
+.name {
+  font-family: var(--header-font);
+}

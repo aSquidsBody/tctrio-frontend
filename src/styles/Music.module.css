@@ -1,0 +1,6 @@
+.page {
+  height: auto;
+  width: 100vw;
+  z-index: 0;
+  overflow-x: hidden;
+}

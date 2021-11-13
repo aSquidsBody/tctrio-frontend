@@ -1,0 +1,140 @@
+.component {
+  position: relative;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: var(--primary-color);
+  opacity: 0.2;
+}
+
+.textBanner {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.textBanner li {
+  position: relative;
+  height: auto;
+  font-family: var(--body-font);
+  font-size: 2rem;
+  line-height: 3.5rem;
+  list-style: none;
+  color: black;
+}
+
+.halfBox {
+  position: relative;
+}
+
+.halfBox::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  left: -10%;
+  height: 50%;
+  width: 120%;
+  border-bottom: solid 1px black;
+  border-right: solid 1px black;
+  border-left: solid 1px black;
+  /* background: linear-gradient(var(--white-color), 25%, rgb(214, 213, 213)); */
+  z-index: -1;
+}
+
+.blueBox {
+  color: white;
+}
+
+.blueBox::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: var(--primary-color);
+  right: 60%;
+  mix-blend-mode: color-burn;
+  z-index: -1;
+}
+
+.paragraph {
+  margin-bottom: 1rem;
+  font-family: var(--alternate-font);
+
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.aboutImage {
+  height: 450px;
+  width: 450px;
+  border-radius: 50%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 20px;
+}
+
+.textCol {
+  grid-column: 1/3;
+  /* margin: 20px 10px 0px 15%; */
+  margin: 20px;
+}
+
+.textBox {
+  /* width: 75%; */
+  padding: 20px 30px;
+  background: #f5f5f5;
+  color: black;
+  border-right: solid 3px #90c4e3;
+  mix-blend-mode: multiply;
+}
+
+.centerBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.centerCol {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bioTitle {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-family: var(--header-font);
+}
+
+.showsCol {
+  grid-column: 3/4;
+  width: 100%;
+}
+
+.showsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}

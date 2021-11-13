@@ -1,0 +1,21 @@
+.component {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 650px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.frame {
+  position: relative;
+  width: calc(100% - 2px);
+  margin: 1px;
+}
