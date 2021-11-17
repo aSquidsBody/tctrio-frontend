@@ -30,8 +30,8 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "set PORT=8000 && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts --openssl-legacy-provider test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
