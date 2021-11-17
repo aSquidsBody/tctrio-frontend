@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Banner from "../other/Banner";
 import AlbumGrid from "../media/AlbumGrid";
 import YoutubeGrid from "../media/YoutubeGrid";

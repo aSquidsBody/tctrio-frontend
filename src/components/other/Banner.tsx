@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import styles from "./styles/Banner.module.css";
 
 class Banner extends Component<{

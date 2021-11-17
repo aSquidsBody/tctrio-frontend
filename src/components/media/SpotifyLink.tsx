@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 import spotifyLogo from "../../assets/Spotify_Logo_Green.png";
 import styles from "./styles/SpotifyLink.module.css";

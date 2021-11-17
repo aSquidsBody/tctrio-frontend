@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Body from "../Body";
 import CustomHeader from "../../components/CustomHeader";
 import BookingForm from "../../components/contact/BookingForm";

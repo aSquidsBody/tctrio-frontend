@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Video } from "../../types/youtube";
 import YoutubeVideo from "./YoutubeVideo";
 

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { useMediaQuery } from "react-responsive";
 import { isThisTypeNode } from "typescript";
 import { MOBILEWIDTH } from "../../config";

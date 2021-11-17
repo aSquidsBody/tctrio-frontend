@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { YOUTUBE, SPOTIFY, TWITTER, INSTAGRAM, FACEBOOK } from "../../config";
 
 import classNames from "classnames";

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import SpotifyLink from "./SpotifyLink";
 import { Custom } from "../other/Responsive";
 

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Body from "../Body";
 import { Desktop } from "../../components/other/Responsive";
 import Banner from "../../components/other/Banner";
