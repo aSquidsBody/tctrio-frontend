@@ -46,7 +46,7 @@ class Socials extends Component {
   render() {
     return (
       <MediaQuery maxWidth={650}>
-        {(matches) =>
+        {(matches: boolean) =>
           matches ? (
             <div className={styles.componentMobile}>
               {this.socialMobile(facebook, facebookBlack)}
