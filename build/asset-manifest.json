@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.57fc3b38.chunk.css",
+    "main.js": "/static/js/main.b7ab1622.chunk.js",
+    "main.js.map": "/static/js/main.b7ab1622.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e34c6a4c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e34c6a4c.js.map",
+    "static/js/2.77524ab1.chunk.js": "/static/js/2.77524ab1.chunk.js",
+    "static/js/2.77524ab1.chunk.js.map": "/static/js/2.77524ab1.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.57fc3b38.chunk.css.map": "/static/css/main.57fc3b38.chunk.css.map",
+    "static/js/2.77524ab1.chunk.js.LICENSE.txt": "/static/js/2.77524ab1.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/logo_black.6abb0fc8.png",
+    "static/media/Instagram_Black.aaa207e2.png": "/static/media/Instagram_Black.aaa207e2.png",
+    "static/media/Spotify_Logo_Green.0c4ae91b.png": "/static/media/Spotify_Logo_Green.0c4ae91b.png",
+    "static/media/Twitter_Black.9685c410.png": "/static/media/Twitter_Black.9685c410.png",
+    "static/media/band3_flat2.518ee44e.png": "/static/media/band3_flat2.518ee44e.png",
+    "static/media/devices.004c89e3.png": "/static/media/devices.004c89e3.png",
+    "static/media/home_image_desktop_3.e684bb66.jpg": "/static/media/home_image_desktop_3.e684bb66.jpg",
+    "static/media/sig_white.03d83b01.png": "/static/media/sig_white.03d83b01.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e34c6a4c.js",
+    "static/js/2.77524ab1.chunk.js",
+    "static/css/main.57fc3b38.chunk.css",
+    "static/js/main.b7ab1622.chunk.js"
+  ]
+}
