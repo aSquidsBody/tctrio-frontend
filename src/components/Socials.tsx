@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// @ts-ignore
 import MediaQuery from "react-responsive";
 
 import styles from "../styles/Socials.module.css";

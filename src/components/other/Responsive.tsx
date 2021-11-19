@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// @ts-ignore
 import { useMediaQuery } from "react-responsive";
 import { isThisTypeNode } from "typescript";
 import { MOBILEWIDTH } from "../../config";
