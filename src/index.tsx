@@ -1,6 +1,7 @@
 // Entrypoint of the javascript application
 
 import React from "react";
+// @ts-ignore
 import ReactDOM from "react-dom";
 import App from "./app/App";
 // @ts-ignore
