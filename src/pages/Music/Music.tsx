@@ -32,7 +32,7 @@ class Music extends Component<
       const res = await axios.get<{ albums: Album[] }>(url);
       this.setState({ albums: res.data.albums });
     } catch (err: any) {
-      console.log("Error getting albums", err.response.data);
+      console.log("Error getting albums", err.response?.data);
     }
   };
 
