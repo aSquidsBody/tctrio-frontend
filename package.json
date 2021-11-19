@@ -18,7 +18,7 @@
     "serve": "^13.0.2",
     "source-map-explorer": "^2.5.2",
     "web-vitals": "^1.1.2",
-    "webpack": "^4.44.2",
+    "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1"
   },
   "scripts": {
