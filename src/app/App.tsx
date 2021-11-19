@@ -5,7 +5,7 @@ import axios from "axios";
 import "../assets/fonts/Claxton-Bold.otf";
 import "../assets/fonts/Claxton-Light.otf";
 import "../assets/fonts/Claxton.otf";
-
+// @ts-ignore
 import { Switch, Route } from "react-router-dom";
 import "../styles/App.css";
 

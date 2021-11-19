@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// @ts-ignore
 import { Link } from "react-router-dom";
 import axios from "axios";
 

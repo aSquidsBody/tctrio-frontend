@@ -3,6 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app/App";
+// @ts-ignore
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
