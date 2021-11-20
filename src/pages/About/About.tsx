@@ -6,7 +6,7 @@ import Shows from "../../components/about/Shows";
 import axios from "axios";
 import classNames from "classnames";
 
-import { SERVER_URL } from "../../config";
+import { ABOUT_URL } from "../../config";
 import bandBanner from "../../assets/band3_flat2.png";
 
 import styles from "./styles/About.module.css";
@@ -14,7 +14,7 @@ import styles from "./styles/About.module.css";
 class About extends Component<{}, {}> {
   // when component mounts, load in media ids from database (no loading in the sub-components)
   state = { text: "" };
-  aboutUrl = SERVER_URL + "/api/about";
+  aboutUrl = ABOUT_URL;
 
   fetchData = async () => {
     try {

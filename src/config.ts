@@ -1,9 +1,7 @@
-export const SERVER_URL = "http://localhost:3000";
-export const MUSIC_URL = SERVER_URL + "/api/music";
-export const ALBUM_URL = MUSIC_URL + "/album";
-export const VIDEO_URL = SERVER_URL + "/api/videos";
-export const YOUTUBE_URL = VIDEO_URL + "/youtube-videos";
-export const CONTACT_URL = SERVER_URL + "/api/contact";
+export const ALBUM_URL = "/api/music/album";
+export const YOUTUBE_URL = "/api/videos/youtube-videos";
+export const CONTACT_URL = "/api/contact";
+export const ABOUT_URL = "/api/about";
 
 export const MOBILEWIDTH = 650; // pixels
 
