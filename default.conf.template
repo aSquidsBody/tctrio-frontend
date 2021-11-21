@@ -1,0 +1,13 @@
+server{
+    # listen to the port defined by heroku
+    listen $PORT default_server;
+
+    # serve static files for request made to
+    location / {
+        root /build;
+    }
+
+    location /api {
+        proxy_pass "https://tctrio-backend.herokuapp.com/";
+    }
+}
