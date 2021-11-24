@@ -1,10 +1,11 @@
 server{
     # listen to the port defined by heroku
     listen $PORT default_server;
+    root /build;
 
     # serve static files for request made to
     location / {
-        root /build;
+        try_files $uri /index.html;
     }
 
     location /api {
