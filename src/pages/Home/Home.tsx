@@ -7,6 +7,7 @@ import Banner from "../../components/other/Banner";
 
 import marshallImage from "../../assets/home_image_desktop_3.jpg";
 import { Media, SpotifyToken } from "../../types/spotify";
+import { MUSIC_HIGHLIGHTS_URL, VIDEO_HIGHLIGHTS_URL } from "../../config";
 import styles from "./styles/Home.module.css";
 
 class Home extends Component<
@@ -22,18 +23,14 @@ class Home extends Component<
     let returns = "";
 
     try {
-      const res = await axios.get<Media>(
-        "http://localhost:3000/api/music/highlights"
-      );
+      const res = await axios.get<Media>(MUSIC_HIGHLIGHTS_URL);
       this.setState({ songIds: res.data.ids });
     } catch (err) {
       console.log("Error fetching music highlight ids");
     }
 
     try {
-      const res = await axios.get<Media>(
-        "http://localhost:3000/api/videos/youtube-highlights"
-      );
+      const res = await axios.get<Media>(VIDEO_HIGHLIGHTS_URL);
       this.setState({ videoIds: res.data.ids });
     } catch (err) {
       console.log("Error fetching youtube highlight ids");

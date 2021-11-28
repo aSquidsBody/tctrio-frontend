@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { Show } from "../../types/show";
+import { SHOWS_URL } from "../../config";
 import styles from "./styles/Shows.module.css";
 
 class Shows extends Component {
@@ -12,7 +13,7 @@ class Shows extends Component {
     pastShows: [],
   };
 
-  showsUrl = "http://localhost:3000/api/about/shows";
+  showsUrl = SHOWS_URL;
 
   fetchData = async () => {
     try {

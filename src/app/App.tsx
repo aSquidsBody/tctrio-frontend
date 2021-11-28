@@ -14,6 +14,7 @@ import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
 import Music from "../pages/Music/Music";
 import { SpotifyToken, SpotifyTokenResp } from "../types/spotify";
+import { TOKEN_URL } from "../config";
 
 class App extends Component {
   state = {
@@ -27,9 +28,7 @@ class App extends Component {
     if (expires < new Date(Date.now())) {
       try {
         try {
-          const res = await axios.get<SpotifyTokenResp>(
-            "http://localhost:3000/api/music/spotify-token"
-          );
+          const res = await axios.get<SpotifyTokenResp>(TOKEN_URL);
 
           // store the token in localStorage
           localStorage.setItem("token", res.data.accessToken);
