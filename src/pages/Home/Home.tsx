@@ -5,7 +5,7 @@ import SpotifySong from "../../components/media/SpotifySong";
 import YoutubeVideo from "../../components/media/YoutubeVideo";
 import Banner from "../../components/other/Banner";
 
-import marshallImage from "../../assets/home_image_desktop_3.jpg";
+import marshallImage from "../../assets/home_image_desktop_3_cropped.jpg";
 import { Media, SpotifyToken } from "../../types/spotify";
 import { MUSIC_HIGHLIGHTS_URL, VIDEO_HIGHLIGHTS_URL } from "../../config";
 import styles from "./styles/Home.module.css";
@@ -23,6 +23,7 @@ class Home extends Component<
     let returns = "";
 
     try {
+      console.log("ENDPOINT", MUSIC_HIGHLIGHTS_URL);
       const res = await axios.get<Media>(MUSIC_HIGHLIGHTS_URL);
       this.setState({ songIds: res.data.ids });
     } catch (err) {
@@ -50,8 +51,8 @@ class Home extends Component<
             <Banner
               img={marshallImage}
               width="2500px"
-              top="-700px"
-              left="-300px"
+              top="-100px"
+              left="-500px"
             />
           </div>
           <div className="container">

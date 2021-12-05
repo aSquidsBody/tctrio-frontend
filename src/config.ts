@@ -1,11 +1,17 @@
-export const ALBUM_URL = "/api/music/album";
-export const TOKEN_URL = "/api/music/spotify-token";
-export const MUSIC_HIGHLIGHTS_URL = "/api/music/highlights";
-export const VIDEO_HIGHLIGHTS_URL = "/api/videos/youtube-highlights";
-export const YOUTUBE_URL = "/api/videos/youtube-videos";
-export const CONTACT_URL = "/api/contact";
-export const ABOUT_URL = "/api/about";
-export const SHOWS_URL = "/api/about/shows";
+const local = "http://localhost:3000";
+
+const url = function (path: string) {
+  return local + path;
+};
+
+export const ALBUM_URL = url("/api/music/album");
+export const TOKEN_URL = url("/api/music/spotify-token");
+export const MUSIC_HIGHLIGHTS_URL = url("/api/music/highlights");
+export const VIDEO_HIGHLIGHTS_URL = url("/api/videos/youtube-highlights");
+export const YOUTUBE_URL = url("/api/videos/youtube-videos");
+export const CONTACT_URL = url("/api/contact");
+export const ABOUT_URL = url("/api/about");
+export const SHOWS_URL = url("/api/about/shows");
 
 export const MOBILEWIDTH = 650; // pixels
 

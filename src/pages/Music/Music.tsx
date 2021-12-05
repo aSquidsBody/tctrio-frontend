@@ -7,7 +7,7 @@ import YoutubeGrid from "../../components/media/YoutubeGrid";
 
 import { SpotifyToken, Album } from "../../types/spotify";
 import { Video } from "../../types/youtube";
-import devicesBanner from "../../assets/devices.png";
+import devicesBanner from "../../assets/devices_cropped.png";
 import CustomHeader from "../../components/CustomHeader";
 
 import axios from "axios";
@@ -57,7 +57,7 @@ class Music extends Component<
         <div className={styles.component}>
           <Desktop>
             <div className={styles.banner}>
-              <Banner img={devicesBanner} top={"-100%"} width={"1920px"} />
+              <Banner img={devicesBanner} width="2000px" top="-50px" />
             </div>
           </Desktop>
           <div className="container">
