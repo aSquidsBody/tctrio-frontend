@@ -1,7 +1,7 @@
 const local = "http://localhost:3000";
 
 const url = function (path: string) {
-  return local + path;
+  return path;
 };
 
 export const ALBUM_URL = url("/api/music/album");
