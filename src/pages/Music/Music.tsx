@@ -38,8 +38,11 @@ class Music extends Component<
 
   fetchVideos = async () => {
     try {
-      const res = await axios.get<Video[]>(YOUTUBE_URL);
-      this.setState({ videos: res.data });
+      const res = await axios.get<{ ids: string[] }>(YOUTUBE_URL);
+      const videos: Video[] = res.data.ids.map((id) => {
+        return { id };
+      });
+      this.setState({ videos });
       console.log(res.data);
     } catch (err: any) {
       console.log("Error getting youtube ids", err);
