@@ -5,21 +5,17 @@ import Banner from "../../components/other/Banner";
 import AlbumGrid from "../../components/media/AlbumGrid";
 import YoutubeGrid from "../../components/media/YoutubeGrid";
 
-import { SpotifyToken, Album } from "../../types/spotify";
-import { Video } from "../../types/youtube";
+import { Album } from "../../types/spotify";
+import { Playlist, Video } from "../../types/youtube";
 import devicesBanner from "../../assets/devices_cropped.png";
 import CustomHeader from "../../components/CustomHeader";
 
 import axios from "axios";
 import { ALBUM_URL, YOUTUBE_URL } from "../../config";
 import styles from "./styles/Music.module.css";
+import { pageview } from "react-ga";
 
-class Music extends Component<
-  {
-    spotifyToken: SpotifyToken;
-  },
-  {}
-> {
+class Music extends Component {
   state = {
     square: true,
     albums: [] as Album[],
@@ -38,25 +34,24 @@ class Music extends Component<
 
   fetchVideos = async () => {
     try {
-      const res = await axios.get<{ ids: string[] }>(YOUTUBE_URL);
-      const videos: Video[] = res.data.ids.map((id) => {
-        return { id };
-      });
+      console.log(YOUTUBE_URL);
+      const res = await axios.get<{ playlist: Playlist }>(YOUTUBE_URL);
+      const videos: Video[] = res.data.playlist.videos;
       this.setState({ videos });
-      console.log(res.data);
     } catch (err: any) {
       console.log("Error getting youtube ids", err);
     }
   };
 
   componentDidMount = async () => {
+    pageview(window.location.pathname);
     await this.fetchAlbums();
     await this.fetchVideos();
   };
 
   render() {
     return (
-      <Body>
+      <Body page="Music">
         <div className={styles.component}>
           <Desktop>
             <div className={styles.banner}>
@@ -68,10 +63,7 @@ class Music extends Component<
               <CustomHeader value={"Discography"} />
               {this.state.albums.length ? (
                 <div>
-                  <AlbumGrid
-                    spotifyToken={this.props.spotifyToken}
-                    albums={this.state.albums}
-                  />
+                  <AlbumGrid albums={this.state.albums} />
                 </div>
               ) : null}
             </section>
@@ -81,7 +73,11 @@ class Music extends Component<
                 color={"var(--white-color)"}
               />
               {this.state.videos.length !== 0 ? (
-                <div>
+                <div
+                  style={{
+                    paddingBottom: "15px",
+                  }}
+                >
                   <YoutubeGrid videos={this.state.videos} />
                 </div>
               ) : null}

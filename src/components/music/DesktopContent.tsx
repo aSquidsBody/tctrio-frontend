@@ -32,10 +32,7 @@ class DesktopContent extends Component<
             <CustomHeader value={"Discography"} />
             {this.props.albums.length ? (
               <div>
-                <AlbumGrid
-                  spotifyToken={this.props.spotifyToken}
-                  albums={this.props.albums}
-                />
+                <AlbumGrid albums={this.props.albums} />
               </div>
             ) : null}
           </section>

@@ -1,12 +1,8 @@
+import classNames from "classnames";
 import React, { Component } from "react";
 // @ts-ignore
 import { Link } from "react-router-dom";
-import { Mobile, Desktop } from "../other/Responsive";
-import classNames from "classnames";
-
-import blackSig from "../../assets/sig_black.png";
 import whiteSig from "../../assets/sig_white.png";
-
 import styles from "./styles/NavbarMobile.module.css";
 
 class NavbarMobile extends Component<

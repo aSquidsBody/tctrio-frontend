@@ -1,42 +1,151 @@
+import classNames from "classnames";
 import React, { Component } from "react";
 // @ts-ignore
 import { Link } from "react-router-dom";
-import { Mobile, Desktop } from "../other/Responsive";
-import classNames from "classnames";
-
-import blackSig from "../../assets/sig_black.png";
+import FacebookIcon from "../other/socials/FacebookIcon";
+import SpotifyIcon from "../other/socials/SpotifyIcon";
+import InstagramIcon from "../other/socials/InstagramIcon";
+import TwitterIcon from "../other/socials/TwitterIcon";
 import whiteSig from "../../assets/sig_white.png";
 
-import styles from "./styles/NavbarDesktop.module.css";
+interface NavBarProps {
+  links: { endpoint: string; name: string }[];
+  page: string;
+}
 
-class NavbarDesktop extends Component<
-  {
-    links: { endpoint: string; name: string }[];
-  },
-  {}
-> {
+class NavbarDesktop extends Component<NavBarProps, {}> {
+  state: { hover: string };
+
+  constructor(props: NavBarProps) {
+    super(props);
+
+    this.state = {
+      hover: "",
+    };
+  }
+
+  componentStyle: React.CSSProperties = {
+    position: "relative",
+    width: "100%",
+    height: "var(--menu-height)",
+    backgroundColor: "var(--primary-color)",
+  };
+
+  menuStyle: React.CSSProperties = {
+    position: "relative",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  imageWrapper: React.CSSProperties = {
+    position: "relative",
+    height: "var(--menu-height)",
+    width: "calc(1200 / 675 * 80px)",
+  };
+
+  imageStyle: React.CSSProperties = {
+    position: "absolute",
+    height: "80px",
+    width: "calc(1200 / 675 * 80px)",
+    top: "-9px",
+    left: "0px",
+  };
+
+  right: React.CSSProperties = {
+    position: "absolute",
+    top: "0px",
+    right: "0px",
+    display: "flex",
+    flexDirection: "row",
+  };
+
+  socialList: React.CSSProperties = {
+    margin: "auto 0px",
+    display: "flex",
+    flexDirection: "row",
+  };
+
+  liIconStyle: React.CSSProperties = {
+    listStyle: "none",
+    padding: "0rem 0.5rem",
+  };
+
+  iconStyle: React.CSSProperties = {
+    height: "calc(var(--menu-height) / 2)",
+    width: "calc(var(--menu-height) / 2)",
+  };
+
+  navList: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "row",
+    height: "var(--menu-height)",
+    lineHeight: "var(--menu-height)",
+  };
+
+  liStyle: React.CSSProperties = {
+    listStyle: "none",
+    padding: "0rem 0.9rem",
+  };
+
+  linkStyle = (name: string): React.CSSProperties => {
+    return {
+      fontSize: "1.4rem",
+      fontFamily: "var(--header-font)",
+      color:
+        name === this.props.page ? "var(--vice-blue)" : "var(--white-color)",
+      opacity: this.state.hover === name ? 0.8 : 1,
+      transition: this.state.hover === name ? "opacity 0.05s" : "opacity 0.02s",
+    };
+  };
+
   render() {
     return (
-      <div className={styles.component}>
-        <div className={classNames(styles.menu, "container")}>
-          <img
-            src={whiteSig}
-            alt="Tyler's Signature"
-            className={styles.signature}
-          />
-          <ul>
-            {this.props.links.map(
-              ({ endpoint, name }: { endpoint: string; name: string }, idx) => {
-                return (
-                  <li key={endpoint} className={styles.listItem}>
-                    <Link to={endpoint} className={styles.link}>
-                      {name.toUpperCase()}
-                    </Link>
-                  </li>
-                );
-              }
-            )}
-          </ul>
+      <div style={this.componentStyle}>
+        <div className={classNames("noSelect", "container")}>
+          <div style={this.menuStyle}>
+            <div style={this.imageWrapper}>
+              <img
+                src={whiteSig}
+                alt="Tyler's Signature"
+                style={this.imageStyle}
+              />
+            </div>
+            <div style={this.right}>
+              <ul style={this.socialList}>
+                <li style={this.liIconStyle}>
+                  <FacebookIcon style={this.iconStyle} />
+                </li>
+                <li style={this.liIconStyle}>
+                  <SpotifyIcon style={this.iconStyle} />
+                </li>
+                <li style={this.liIconStyle}>
+                  <InstagramIcon style={this.iconStyle} />
+                </li>
+                <li style={this.liIconStyle}>
+                  <TwitterIcon style={this.iconStyle} />
+                </li>
+              </ul>
+              <ul style={this.navList}>
+                {this.props.links.map(
+                  ({ endpoint, name }: { endpoint: string; name: string }) => {
+                    return (
+                      <li key={endpoint} style={this.liStyle}>
+                        <Link
+                          to={endpoint}
+                          style={this.linkStyle(name)}
+                          onMouseEnter={() => this.setState({ hover: name })}
+                          onMouseLeave={() => this.setState({ hover: "" })}
+                        >
+                          {name.toUpperCase()}
+                        </Link>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     );

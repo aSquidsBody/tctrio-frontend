@@ -99,3 +99,8 @@
 .link:active {
   transform: translateX(5px) translateY(3px);
 }
+
+.barTitle {
+  width: 200px;
+  text-align: center;
+}

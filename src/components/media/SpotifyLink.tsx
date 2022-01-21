@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import spotifyLogo from "../../assets/Spotify_Logo_Green.png";
+// import spotifyLogo from "../../assets/Spotify_Logo_Green.png";
+import spotifyLogo from "../../assets/Spotify_Green.png";
 import styles from "./styles/SpotifyLink.module.css";
 
 class SpotifyLink extends Component<{ url: string }, {}> {
@@ -13,9 +14,7 @@ class SpotifyLink extends Component<{ url: string }, {}> {
           target="_blank"
           rel="noreferrer"
           className={styles.link}
-        >
-          {""}
-        </a>
+        ></a>
       </div>
     );
   }

@@ -1,14 +1,10 @@
-import React, { Component } from "react";
-import { YOUTUBE, SPOTIFY, TWITTER, INSTAGRAM, FACEBOOK } from "../../config";
-
 import classNames from "classnames";
-
-import spotifyBlack from "../../assets/Spotify_Black.png";
-import youtubeBlack from "../../assets/Youtube_Black.png";
-import twitterBlack from "../../assets/Twitter_Black.png";
-import instagramBlack from "../../assets/Instagram_Black.png";
+import React, { Component } from "react";
+import { event } from "react-ga";
 import facebookBlack from "../../assets/Facebook_Black.png";
-
+import instagramBlack from "../../assets/Instagram_Black.png";
+import twitterBlack from "../../assets/Twitter_Black.png";
+import { FACEBOOK, INSTAGRAM, TWITTER } from "../../config";
 import styles from "./styles/SocialsBar.module.css";
 
 class SocialsBar extends Component {

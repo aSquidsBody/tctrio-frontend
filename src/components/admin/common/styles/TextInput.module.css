@@ -1,0 +1,26 @@
+.component {
+  position: relative;
+  height: 100%;
+}
+
+.optional {
+  font-weight: normal;
+}
+
+.component .textInput {
+  width: 100%;
+  margin: 5px 0px;
+  background: none;
+  color: white;
+  padding: 5px 7px;
+  line-height: 1.15rem;
+  font-size: 1.05rem;
+  border: solid 1px rgb(41, 41, 41);
+  border-radius: 5px;
+  font-family: var(--alternate-font);
+}
+
+.component .textInput:focus {
+  outline-style: solid;
+  outline-color: var(--selected-color);
+}

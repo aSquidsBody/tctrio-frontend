@@ -18,6 +18,18 @@
   opacity: 0.2;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid {
+    display: block;
+  }
+}
+
 .textBanner {
   width: 100%;
   display: flex;
@@ -25,7 +37,7 @@
   margin-top: 20px;
 }
 
-.textBanner li {
+.halfBox {
   position: relative;
   height: auto;
   font-family: var(--body-font);
@@ -33,10 +45,6 @@
   line-height: 3.5rem;
   list-style: none;
   color: black;
-}
-
-.halfBox {
-  position: relative;
 }
 
 .halfBox::before {
@@ -76,18 +84,6 @@
   text-align: center;
 }
 
-.aboutImage {
-  height: 450px;
-  width: 450px;
-  border-radius: 50%;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 20px;
-}
-
 .textCol {
   grid-column: 1/3;
   /* margin: 20px 10px 0px 15%; */
@@ -115,6 +111,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .textBox {
+    padding: 0px;
+  }
+
+  .centerCol {
+    width: auto;
+  }
+
+  .textBox {
+    border: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .textBanner {
+    visibility: collapse;
+    height: 0px;
+  }
 }
 
 .bioTitle {

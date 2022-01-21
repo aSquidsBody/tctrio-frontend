@@ -50,25 +50,6 @@ export interface SongPreview {
   releaseDate: string;
 }
 
-export const spotifyToTrack = (spotifyTrack: SpotifyTrack): Track => {
-  return {
-    artist: spotifyTrack.artists[0],
-    duration: spotifyTrack.duration,
-    id: spotifyTrack.id,
-    uri: spotifyTrack.uri,
-    previewUrl: spotifyTrack.preview_url,
-    externalUrl: spotifyTrack.external_urls.spotify,
-    type: spotifyTrack.album.album_type,
-    name: spotifyTrack.name,
-    images: {
-      large: spotifyTrack.album.images[0],
-      medium: spotifyTrack.album.images[1],
-      small: spotifyTrack.album.images[2],
-    },
-    releaseDate: spotifyTrack.album.release_date,
-  };
-};
-
 export interface Media {
   ids: string[];
 }
@@ -91,16 +72,71 @@ interface Item {
   externalUrl: string;
 }
 
-export interface Track extends Item {
-  artist: Artist;
-  duration: number;
-  previewUrl: string;
-  images: {
-    large: AlbumCover;
-    medium: AlbumCover;
-    small: AlbumCover;
+export interface AlbumCover {
+  height?: number;
+  width?: number;
+  url: string;
+}
+
+export interface Artist {
+  name: string;
+  uri: string;
+  id: string;
+}
+
+//  used by playlist interface
+export interface Track {
+  id: string;
+  album: {
+    images: {
+      large: AlbumCover;
+      medium: AlbumCover;
+      small: AlbumCover;
+    };
+    releaseDate: string;
   };
-  releaseDate?: string;
+  previewUrl: string;
+  externalUrl: string;
+  name: string;
+}
+
+export interface Playlist {
+  id: string;
+  tracks: Track[];
+}
+/////////////////////
+
+export interface SpotifyItem {
+  type: string;
+  id: string;
+  name: string;
+  artists: Artist[];
+  ["external_urls"]: {
+    spotify: string;
+  };
+  uri: string;
+}
+
+export interface Media {
+  ids: string[];
+}
+
+export interface SpotifyTokenResp {
+  expires: string;
+  accessToken: string;
+}
+
+export interface SpotifyToken {
+  expires: Date;
+  accessToken: string;
+}
+
+interface Item {
+  id: string;
+  type: string;
+  name: string;
+  uri: string;
+  externalUrl: string;
 }
 
 export interface Album extends Item {

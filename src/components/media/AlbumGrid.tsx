@@ -13,7 +13,6 @@ const QueryLTE780 = Custom({ maxWidth: 780 });
 class AlbumGrid extends Component<
   {
     albums: Album[];
-    spotifyToken: SpotifyToken;
   },
   {}
 > {
@@ -25,7 +24,7 @@ class AlbumGrid extends Component<
         {Array.from(Array(n).keys()).map((i) => {
           const albs = albums.slice(rowSize * i, rowSize * (i + 1));
           return (
-            <div className={styles.row}>
+            <div className={styles.row} key={"album" + i}>
               <ul key={albs.map((a) => a.name).join("")}>
                 {this.albumRow(albs)}
               </ul>

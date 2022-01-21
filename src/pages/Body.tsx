@@ -4,24 +4,20 @@ import NavbarMobile from "../components/Navbar/NavbarMobile";
 import { Desktop, Mobile } from "../components/other/Responsive";
 import { PAGES } from ".";
 
-class BodyWrapper extends Component<{ page: JSX.Element }, {}> {
+class Body extends Component<{ page: string }, {}> {
   render() {
     return (
       <div style={{ position: "relative" }}>
         <Desktop>
-          <NavbarDesktop links={PAGES} />
+          <NavbarDesktop links={PAGES} page={this.props.page} />
         </Desktop>
         <Mobile>
           <NavbarMobile links={PAGES}></NavbarMobile>
         </Mobile>
-        <div className="newBody">{this.props.page}</div>
+        <div className="newBody">{this.props.children}</div>
       </div>
     );
   }
 }
-
-const Body = ({ children }: { children: JSX.Element }) => {
-  return <BodyWrapper page={children} />;
-};
 
 export default Body;

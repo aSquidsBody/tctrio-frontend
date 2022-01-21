@@ -2,12 +2,15 @@ import React, { Component } from "react";
 // @ts-ignore
 import MediaQuery from "react-responsive";
 
-import styles from "../styles/Socials.module.css";
 import spotifyBlack from "../assets/Spotify_Black.png";
 import youtubeBlack from "../assets/Youtube_Black.png";
 import twitterBlack from "../assets/Twitter_Black.png";
 import instagramBlack from "../assets/Instagram_Black.png";
 import facebookBlack from "../assets/Facebook_Black.png";
+import FacebookIcon from "./other/socials/FacebookIcon";
+import InstagramIcon from "./other/socials/InstagramIcon";
+import SpotifyIcon from "./other/socials/SpotifyIcon";
+import TwitterIcon from "./other/socials/TwitterIcon";
 
 const spotify =
   "https://open.spotify.com/artist/63GbQYzf0EbxtI9D23IdrU?si=kLVHVQ3ISASnn7MB7mSvcA&dl_branch=1";
@@ -20,52 +23,32 @@ const instagram = "https://www.instagram.com/tctrio";
 
 const facebook = "https://www.facebook.com/tctrio";
 
-class Socials extends Component {
-  socialDesktop = (href: string, imgSrc: string) => {
-    return (
-      <div className={styles.socialDesktop}>
-        <a href={href} target="_blank" rel="noreferrer" className={styles.link}>
-          {""}
-        </a>
-        <img src={imgSrc} alt="Facebook Logo" className={styles.icon} />
-      </div>
-    );
+interface SocialsProps {
+  style?: React.CSSProperties;
+}
+
+class Socials extends Component<SocialsProps, {}> {
+  iconStyle: React.CSSProperties = {
+    height: "30px",
+    width: "30px",
   };
 
-  socialMobile = (href: string, imgSrc: string) => {
-    return (
-      <div className={styles.socialMobile}>
-        <a href={href} target="_blank" rel="noreferrer" className={styles.link}>
-          {""}
-        </a>
-        <img src={imgSrc} alt="Facebook Logo" className={styles.icon} />
-      </div>
-    );
+  row: React.CSSProperties = {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-evenly",
   };
 
   render() {
     return (
-      <MediaQuery maxWidth={650}>
-        {(matches: boolean) =>
-          matches ? (
-            <div className={styles.componentMobile}>
-              {this.socialMobile(facebook, facebookBlack)}
-              {this.socialMobile(instagram, instagramBlack)}
-              {this.socialMobile(spotify, spotifyBlack)}
-              {this.socialMobile(youtube, youtubeBlack)}
-              {this.socialMobile(twitter, twitterBlack)}
-            </div>
-          ) : (
-            <div className={styles.componentDesktop}>
-              {this.socialDesktop(facebook, facebookBlack)}
-              {this.socialDesktop(instagram, instagramBlack)}
-              {this.socialDesktop(spotify, spotifyBlack)}
-              {this.socialDesktop(youtube, youtubeBlack)}
-              {this.socialDesktop(twitter, twitterBlack)}
-            </div>
-          )
-        }
-      </MediaQuery>
+      <div style={this.props.style}>
+        <div style={this.row}>
+          <FacebookIcon style={this.iconStyle} />
+          <InstagramIcon style={this.iconStyle} />
+          <TwitterIcon style={this.iconStyle} />
+          {/* <SpotifyIcon style={this.iconStyle} /> */}
+        </div>
+      </div>
     );
   }
 }

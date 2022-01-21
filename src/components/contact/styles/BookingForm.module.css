@@ -52,21 +52,21 @@
   }
 }
 
-input,
-textarea,
+.textInput,
+.commentBox,
 .button {
   font-family: var(--alternate-font);
   font-size: 1rem;
   line-height: 2rem;
 }
 
-input,
-textarea {
+.textInput,
+.commentBox {
   padding: 5px 13px;
   width: 100%;
 }
 
-textarea {
+.commentBox {
   min-height: 250px;
   resize: none;
 }

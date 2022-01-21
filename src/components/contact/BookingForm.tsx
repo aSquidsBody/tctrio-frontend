@@ -1,9 +1,6 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { CONTACT_URL } from "../../config";
-import axios from "axios";
-
-import { ContactInfo } from "../../types/contact";
-import { ErrorResp } from "../../types/errors";
 import styles from "./styles/BookingForm.module.css";
 
 class BookingForm extends Component {
@@ -34,12 +31,7 @@ class BookingForm extends Component {
 
   sendForm = async () => {
     try {
-      const headers = {
-        ["Content-Type"]: "application/json",
-      };
-      const res = await axios.post(this.url, this.state, {
-        headers,
-      });
+      await axios.post(this.url, this.state);
       this.setState({
         name: "",
         email: "",
@@ -61,6 +53,7 @@ class BookingForm extends Component {
               <div className={styles.pairMember}>
                 <div className={styles.lineInput}>
                   <input
+                    className={styles.textInput}
                     id="name"
                     type="text"
                     ref={this.state.name.ref}
@@ -72,6 +65,7 @@ class BookingForm extends Component {
               <div className={styles.pairMember}>
                 <div className={styles.lineInput}>
                   <input
+                    className={styles.textInput}
                     id="email"
                     type="text"
                     ref={this.state.email.ref}
@@ -84,6 +78,7 @@ class BookingForm extends Component {
             <div className={styles.row}>
               <div className={styles.lineInput}>
                 <input
+                  className={styles.textInput}
                   id="venue"
                   type="text"
                   ref={this.state.venue.ref}
@@ -96,6 +91,7 @@ class BookingForm extends Component {
               <textarea
                 name="Comments"
                 id="comment"
+                className={styles.commentBox}
                 ref={this.state.comment.ref}
                 placeholder="Comment..."
               ></textarea>

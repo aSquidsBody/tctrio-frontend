@@ -5,11 +5,16 @@ import BookingForm from "../../components/contact/BookingForm";
 import SocialsBar from "../../components/contact/SocialsBar";
 
 import styles from "./styles/Contact.module.css";
+import { pageview } from "react-ga";
 
 class Contact extends Component {
+  componentDidMount() {
+    pageview(window.location.pathname);
+  }
+
   render() {
     return (
-      <Body>
+      <Body page={"Contact"}>
         <div className={styles.component}>
           <CustomHeader value="Booking Form" />
           <BookingForm />

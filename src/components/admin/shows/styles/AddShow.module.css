@@ -1,0 +1,23 @@
+.component {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  font-family: var(--header-font);
+  font-size: 1.3rem;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  border-bottom: white 1px solid;
+}

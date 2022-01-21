@@ -1,17 +1,47 @@
 const local = "http://localhost:3000";
 
 const url = function (path: string) {
-  return path;
+  return local + path;
+  // return path;
 };
+
+export const NAV_ELEMS_WIDTH = 340; // px
+export const BACKGROUND_GREY = "#303030";
+export const BACKGROUND_GREY_GRADIENT =
+  "linear-gradient(0.35turn, #404040, 3%, #303030, 85%, #404040)";
+// export const BACKGROUND_GREY = "var(--primary-color)";
+export const WEBSITE_WIDTH = {
+  STRING: "1480px",
+  NUMBER: 1480,
+};
+
+export const HIGHLIGHT_SONGS = "highlightSongs";
+export const HIGHLIGHT_VIDEOS = "highlightVideos";
+export const MAIN_VIDEOS = "mainVideos";
 
 export const ALBUM_URL = url("/api/music/album");
 export const TOKEN_URL = url("/api/music/spotify-token");
-export const MUSIC_HIGHLIGHTS_URL = url("/api/music/highlights");
-export const VIDEO_HIGHLIGHTS_URL = url("/api/videos/highlights");
-export const YOUTUBE_URL = url("/api/videos");
+export const MUSIC_HIGHLIGHTS_URL = url(
+  "/api/music/playlists/" + HIGHLIGHT_SONGS
+);
+export const VIDEO_HIGHLIGHTS_URL = url(
+  "/api/videos/playlists/" + HIGHLIGHT_VIDEOS
+);
+export const SPOTIFY_PLAYLISTS_URL = url("/api/music/playlists");
+export const YOUTUBE_PLAYLISTS_URL = url("/api/videos/playlists");
+
+export const YOUTUBE_URL = url("/api/videos/playlists/" + MAIN_VIDEOS);
 export const CONTACT_URL = url("/api/contact");
 export const ABOUT_URL = url("/api/about");
 export const SHOWS_URL = url("/api/about/shows");
+export const CURRENT_USER = url("/api/users/current-user");
+export const UPDATE_USER = url("/api/users/update");
+export const LOGIN_URL = url("/api/users/signin");
+export const LOGOUT_URL = url("/api/users/signout");
+export const LOCAL_STORAGE = {
+  LOGGED_IN: "tctrioLoggedIn",
+  EXPIRATION: "tctrioExpires",
+};
 
 export const MOBILEWIDTH = 650; // pixels
 

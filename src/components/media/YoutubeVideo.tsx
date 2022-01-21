@@ -1,17 +1,47 @@
-import React, { Component } from "react";
+import React, { Component, IframeHTMLAttributes } from "react";
 
-import styles from "./styles/YoutubeVideo.module.css";
+interface YoutubeVideoProps {
+  id: string;
+  width?: string;
+  onWheel?: React.WheelEventHandler<HTMLIFrameElement>;
+}
 
-class YoutubeVideo extends Component<{ id: string; width?: string }, {}> {
+class YoutubeVideo extends Component<YoutubeVideoProps, {}> {
+  iframeRef: React.RefObject<HTMLIFrameElement>;
+
+  constructor(props: YoutubeVideoProps) {
+    super(props);
+
+    this.iframeRef = React.createRef();
+  }
+
+  componentStyle: React.CSSProperties = {
+    position: "relative",
+    width: "100%",
+    paddingBottom: "56.25%",
+    zIndex: "0",
+  };
+
+  videoStyle: React.CSSProperties = {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    width: "100%",
+    height: "100%",
+    zIndex: "0",
+    overflow: "hidden",
+  };
+
   render() {
     return (
-      <div className={styles.component}>
+      <div style={this.componentStyle}>
         <iframe
           src={`https://www.youtube.com/embed/${this.props.id}`}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className={styles.video}
+          style={this.videoStyle}
+          ref={this.iframeRef}
         ></iframe>
       </div>
     );

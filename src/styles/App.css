@@ -33,6 +33,7 @@
   --menu-height: 60px;
 
   --primary-color: #1c2434;
+  --selected-color: #66ffff;
 
   --gold-gradient: linear-gradient(0.25turn, gold, white);
 
@@ -63,7 +64,7 @@
   --vice-blue: #0bd3d3;
   --vice-pink: #f890e7;
 
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 * {
@@ -158,4 +159,65 @@ a {
 .space {
   height: var(--header-height);
   width: 100%;
+}
+
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.volumeDiv {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* The slider itself */
+.volumeSlider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 5px; /* Specified height */
+  background: white; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+/* Mouse-over effects */
+.volumeSlider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+}
+
+.volumeSlider::-moz-range-thumb,
+.volumeSlider::-webkit-slider-thumb {
+  /* border: solid 1px black; */
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  background: white; /* Green background */
+  visibility: collapse;
+  border-radius: 50%;
+}
+
+.volumeSlider:hover::-moz-range-thumb,
+.volumeSlider:hover::-webkit-slider-thumb {
+  visibility: visible;
+}
+
+.volumeSlider::-moz-range-thumb,
+.volumeSlider::-webkit-slider-thumb {
 }

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { SpotifyToken, Album } from "../../types/spotify";
+import { Album } from "../../types/spotify";
 
 class MobileContent extends Component<
   {
-    spotifyToken: SpotifyToken;
     albums: Album[];
   },
   {}
