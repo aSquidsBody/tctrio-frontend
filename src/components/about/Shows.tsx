@@ -9,11 +9,24 @@ import AboutShow from "./Show";
 interface ShowsListProps {
   showsList: Show[];
   alt: boolean;
+  style?: React.CSSProperties;
 }
 
 function ShowsList(props: ShowsListProps) {
+  // styles
+  const ulStyle: React.CSSProperties = {
+    width: "100%",
+  };
+
+  const noShow: React.CSSProperties = {
+    fontFamily: "var(--body-font)",
+    textAlign: "center",
+  };
+
+  // dynamic styles
   const liStyle = (last: boolean): React.CSSProperties => {
     return {
+      width: "100%",
       listStyle: "none",
       padding: "10px",
       borderBottom: last
@@ -24,46 +37,29 @@ function ShowsList(props: ShowsListProps) {
     };
   };
 
-  const titleStyle: React.CSSProperties = {
-    fontSize: "1.4rem",
-    fontFamily: "var(--header-font)",
-  };
-
-  const locationStyle: React.CSSProperties = {
-    fontFamily: "var(--body-font)",
-    fontSize: "1.25rem",
-    margin: "3px 0px",
-  };
-
-  const timeStyle: React.CSSProperties = {
-    fontFamily: "var(--body-font)",
-    fontSize: "1.25rem",
-    textAlign: "end",
-  };
-
-  const dateStyle: React.CSSProperties = {
-    fontFamily: "var(--body-font)",
-    fontSize: "1.25rem",
-    textAlign: "end",
-  };
-
   return (
-    <>
+    <div style={props.style}>
       {props.showsList.length > 0 ? (
-        <ul>
+        <ul style={ulStyle}>
           {props.showsList.map((show, idx) => {
             return (
               <li
                 style={liStyle(idx === props.showsList.length - 1)}
                 key={show.name}
               >
-                <AboutShow show={show}></AboutShow>
+                <AboutShow show={show} alt={props.alt} />
               </li>
             );
           })}
         </ul>
-      ) : null}
-    </>
+      ) : (
+        <ul style={ulStyle}>
+          <li style={liStyle(true)}>
+            <p style={noShow}>...None to display...</p>
+          </li>
+        </ul>
+      )}
+    </div>
   );
 }
 
@@ -116,6 +112,7 @@ function Shows(props: ShowsProps) {
     padding: "10px",
     mixBlendMode: "multiply",
     color: "white",
+    width: "100%",
   };
 
   const columnAlt: React.CSSProperties = {
@@ -130,7 +127,7 @@ function Shows(props: ShowsProps) {
     height: "100%",
     width: "100%",
     zIndex: "-1",
-    background: "rgb(110, 110, 110)",
+    background: "rgb(90, 90, 90)",
   };
 
   const columnAltOverlay: React.CSSProperties = {
@@ -138,23 +135,10 @@ function Shows(props: ShowsProps) {
     background: "var(--white-color)",
   };
 
-  const centerCol: React.CSSProperties = {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-
-  const link: React.CSSProperties = {
-    background: "var(--primary-color)",
-    color: "var(--white-color)",
-    padding: "10px 30px",
-    fontFamily: " var(--body-font)",
-  };
-
   const barTitle: React.CSSProperties = {
-    width: "200px",
     textAlign: "center",
+    fontSize: "2rem",
+    fontFamily: "var(--header-font)",
   };
 
   return (
@@ -162,19 +146,12 @@ function Shows(props: ShowsProps) {
       <div style={componentStyle}>
         <div style={column}>
           <div style={columnOverlay} />
-          <h5 style={{ ...barTitle, ...h5Style }}>Upcoming</h5>
+          <h5 style={barTitle}>Upcoming shows</h5>
           <ShowsList showsList={upcomingShows} alt={false}></ShowsList>
         </div>
         <div style={columnAlt}>
           <div style={columnAltOverlay} />
-          <h5
-            style={{
-              ...barTitle,
-              ...h5Style,
-            }}
-          >
-            Past Shows
-          </h5>
+          <h5 style={barTitle}>Past Shows</h5>
           <ShowsList showsList={pastShows} alt={true}></ShowsList>
         </div>
       </div>

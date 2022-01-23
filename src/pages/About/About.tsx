@@ -6,12 +6,16 @@ import Shows from "../../components/about/Shows";
 import axios from "axios";
 
 import { ABOUT_URL } from "../../config";
+import Footer from "../../components/other/Footer";
 import bandBanner from "../../assets/band3_flat2.png";
 
-import { Mobile, Desktop } from "../../components/other/Responsive";
+import { Mobile, Desktop, Custom } from "../../components/other/Responsive";
 import tylerPng from "../../assets/tyler_square.png";
 import { pageview } from "react-ga";
 import CustomHeader from "../../components/CustomHeader";
+
+const CustomMobile = Custom({ maxWidth: 850 });
+const CustomDesktop = Custom({ minWidth: 850 });
 
 interface AboutResponse {
   text: string;
@@ -39,7 +43,7 @@ function About(props: AboutProps) {
   }, [text]);
 
   function paragraph(text: string) {
-    const split = text.split("\n");
+    const split = (text || "...None to display...").split("\n");
     return split.map((subStr, idx) => {
       return (
         <p key={"text_" + idx.toString()} style={paragraphStyle}>
@@ -69,17 +73,33 @@ function About(props: AboutProps) {
     opacity: "0.2",
   };
 
-  const grid: React.CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",
-    marginTop: "20px",
+  const contentDiv = (desktop: boolean): React.CSSProperties => {
+    return {
+      display: "flex",
+      flexDirection: desktop ? "row" : "column",
+      alignItems: desktop ? "" : "center",
+      paddingBottom: "40px",
+    };
+  };
+
+  const contentElem = (desktop: boolean): React.CSSProperties => {
+    return {
+      width: desktop ? "47%" : "94%",
+      margin: "0px 1.5%",
+    };
   };
 
   const textBanner: React.CSSProperties = {
     width: "100%",
     display: "flex",
     justifyContent: "space-evenly",
-    marginTop: "20px",
+    // background: "goldenrod",
+    background: "var(--gold-gradient)",
+    padding: "30px 0px",
+    mixBlendMode: "multiply",
+    // borderTop: "solid 5px var(--primary-color)",
+    // boxShadow: "0px 1px 10px -3px var(--primary-color)",
+    boxShadow: "0px 1px 10px -3px goldenrod",
   };
 
   const halfBox: React.CSSProperties = {
@@ -101,7 +121,7 @@ function About(props: AboutProps) {
     borderBottom: "solid 1px black",
     borderRight: "solid 1px black",
     borderLeft: "solid 1px black",
-    zIndex: -1,
+    zIndex: 1,
   };
 
   const paragraphStyle: React.CSSProperties = {
@@ -111,65 +131,26 @@ function About(props: AboutProps) {
     textAlign: "center",
   };
 
-  const textCol: React.CSSProperties = {
-    gridColumn: "1/3",
-    margin: "20px",
-  };
-
   const textBox: React.CSSProperties = {
     /* width: 75%; */
-    padding: "0px 30px",
+    padding: "20px 30px",
     background: "#f5f5f5",
     color: "black",
     borderRight: "solid 3px #90c4e3",
     mixBlendMode: "multiply",
   };
 
-  const centerBox: React.CSSProperties = {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  };
-
-  const centerCol: React.CSSProperties = {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-
-  const bioTitle: React.CSSProperties = {
-    display: "inline-block",
-    textAlign: "center",
-    marginBottom: "30px",
-    fontSize: "2rem",
-    fontFamily: " var(--header-font)",
-  };
-
-  const showsCol: React.CSSProperties = {
-    gridColumn: "3/4",
-    width: "100%",
-  };
-
-  const showsBox: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "20px",
-    width: "100%",
-  };
-
   return (
     <Body page={"About"}>
       <div style={componentStyle}>
         <Desktop>
-          <div style={banner}>
-            <Banner img={bandBanner} height="100%" width={"1920px"}></Banner>
-          </div>
+          <>
+            <div style={banner}>
+              <div style={bannerOverlay} />
+              <Banner img={bandBanner} height="100%" width={"1920px"}></Banner>
+            </div>
+          </>
         </Desktop>
-
         <Mobile>
           <div
             style={{
@@ -194,40 +175,43 @@ function About(props: AboutProps) {
           </div>
         </Mobile>
         <div className="container">
-          <div style={{ ...textCol }}>
-            <CustomHeader value="Shows"></CustomHeader>
-            <div style={showsCol}>
-              <div style={showsBox}>
+          <CustomDesktop>
+            <div style={contentDiv(true)}>
+              <div style={contentElem(true)}>
+                <CustomHeader value="Biography" />
+                <div style={textBox}>{paragraph(text)}</div>
+              </div>
+              <div style={contentElem(true)}>
+                <CustomHeader value="Shows" />
                 <Shows />
               </div>
             </div>
-            <CustomHeader value="Biography"></CustomHeader>
-
-            <div style={textBox}>
-              {/* <div style={centerBox}>
-                <h5 style={{ ...bioTitle, ...halfBox }}>
-                  <div style={halfBoxOverlay}></div>
-                  Biography
-                </h5>
-              </div> */}
-              {paragraph(text)}
+          </CustomDesktop>
+          <CustomMobile>
+            <div style={contentDiv(false)}>
+              <div style={contentElem(false)}>
+                <CustomHeader value="Shows" />
+                <Shows />
+              </div>
+              <div style={contentElem(false)}>
+                <CustomHeader value="Biography" />
+                <div style={textBox}>{paragraph(text)}</div>
+              </div>
             </div>
-            <ul style={textBanner}>
-              <li style={halfBox}>
-                {" "}
-                <div style={halfBoxOverlay}></div> Blues Soul
-              </li>
-              <li style={halfBox}>
-                <div style={halfBoxOverlay}></div> Jazz Mentality
-              </li>
-              <li style={halfBox}>
-                {" "}
-                <div style={halfBoxOverlay}></div> Rock Attitude
-              </li>
-            </ul>
-          </div>
+          </CustomMobile>
         </div>
       </div>
+      {/* <ul style={textBanner}>
+        <li style={halfBox}>
+          <div style={halfBoxOverlay}></div> Blues Soul
+        </li>
+        <li style={halfBox}>
+          <div style={halfBoxOverlay}></div> Jazz Mentality
+        </li>
+        <li style={halfBox}>
+          <div style={halfBoxOverlay}></div> Rock Attitude
+        </li>
+      </ul> */}
     </Body>
   );
 }

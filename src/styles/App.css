@@ -35,7 +35,7 @@
   --primary-color: #1c2434;
   --selected-color: #66ffff;
 
-  --gold-gradient: linear-gradient(0.25turn, gold, white);
+  --gold-gradient: linear-gradient(0.2turn, gold, 3%, goldenrod, 97%, gold);
 
   --menu-speed: 0.75s;
 
@@ -78,9 +78,9 @@ a {
   text-decoration: none;
 }
 
-.body,
-.newBody {
+.body {
   position: relative;
+  min-height: calc(100vh - var(--menu-height));
   width: 100%;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -88,8 +88,7 @@ a {
   mix-blend-mode: difference;
 }
 
-.body::before,
-.newBody::before {
+.body::before {
   content: "";
   position: absolute;
   display: block;

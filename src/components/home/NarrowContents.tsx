@@ -114,6 +114,7 @@ class NarrowContents extends Component<NarrowProps, {}> {
     lineHeight: "3rem",
     background: BACKGROUND_GREY,
     color: "white",
+    paddingTop: "27px",
   };
 
   narrowVidDiv: React.CSSProperties = {
@@ -129,7 +130,7 @@ class NarrowContents extends Component<NarrowProps, {}> {
     ...this.videoLabel,
     background: "none",
     lineHeight: "1.7rem",
-    padding: "15px 0px 10px 0px",
+    padding: "32px 0px 10px 0px",
   };
 
   socialsDividerBox: React.CSSProperties = {
@@ -149,7 +150,7 @@ class NarrowContents extends Component<NarrowProps, {}> {
       <div style={this.componentStyle}>
         <div style={this.showsWrapper}>
           <div style={this.showLine} />
-          <Logo style={{ marginBottom: "20px" }}></Logo>
+          <Logo style={{ marginBottom: "20px", maxWidth: "500px" }}></Logo>
           <div
             style={this.showsLabel()}
             onMouseEnter={() => this.setState({ hover: "shows" })}

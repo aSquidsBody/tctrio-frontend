@@ -149,7 +149,7 @@ class Home extends Component {
           </Desktop>
           <Mobile>
             <>
-              <div style={this.bannerWrapper}>
+              {/* <div style={this.bannerWrapper}>
                 <Banner
                   img={bandBanner}
                   height="280px"
@@ -157,7 +157,7 @@ class Home extends Component {
                   left="-120px"
                 />
                 <div style={this.backgroundColor}></div>
-              </div>
+              </div> */}
               <NarrowContents
                 tracks={this.state.tracks}
                 videos={this.state.videos}

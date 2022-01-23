@@ -29,6 +29,7 @@ class NavbarDesktop extends Component<NavBarProps, {}> {
     width: "100%",
     height: "var(--menu-height)",
     backgroundColor: "var(--primary-color)",
+    zIndex: 1,
   };
 
   menuStyle: React.CSSProperties = {

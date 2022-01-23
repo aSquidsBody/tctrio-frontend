@@ -4,6 +4,7 @@ import { convertZeros, formatDate } from "../../utils/formatter";
 
 interface AboutShowProps {
   show: Show;
+  alt: boolean;
   style?: React.CSSProperties;
 }
 
@@ -44,7 +45,7 @@ function AboutShow(props: AboutShowProps) {
     return {
       fontFamily: "var(--body-font)",
       marginLeft: expanded ? "5px" : "15px",
-      color: "var(--selected-color)",
+      color: props.alt ? "#ea9a00" : "var(--selected-color)",
       opacity: hovering ? 0.75 : 1,
       cursor: "pointer",
     };
