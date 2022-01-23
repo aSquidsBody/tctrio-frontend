@@ -4,6 +4,7 @@ import { Show } from "../../types/show";
 import { convertZeros, formatDate } from "../../utils/formatter";
 import { SHOWS_URL } from "../../config";
 import axios from "axios";
+import AboutShow from "./Show";
 
 interface ShowsListProps {
   showsList: Show[];
@@ -50,16 +51,13 @@ function ShowsList(props: ShowsListProps) {
     <>
       {props.showsList.length > 0 ? (
         <ul>
-          {props.showsList.map(({ name, location, date, time }, idx) => {
+          {props.showsList.map((show, idx) => {
             return (
               <li
                 style={liStyle(idx === props.showsList.length - 1)}
-                key={name}
+                key={show.name}
               >
-                <p style={titleStyle}>{name}</p>
-                <p style={locationStyle}>{location || "TBA"}</p>
-                <p style={timeStyle}>{time || "TBA"}</p>
-                <p style={dateStyle}>{convertZeros(formatDate(date))}</p>
+                <AboutShow show={show}></AboutShow>
               </li>
             );
           })}
