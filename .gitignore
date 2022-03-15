@@ -2,3 +2,5 @@ node_modules
 build
 heroku.txt
 secrets
+src/pages/Admin
+src/components/admin

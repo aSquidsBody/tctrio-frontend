@@ -9,11 +9,12 @@ class Banner extends Component<{
   width?: string;
 }> {
   style = () => {
-    let css: { [key: string]: string } = {};
+    let css: React.CSSProperties = {};
     if (this.props.top) css.top = this.props.top;
     if (this.props.left) css.left = this.props.left;
     if (this.props.height) css.height = this.props.height;
-    css.width = this.props.width ? this.props.width : "100%";
+    css.width = "100%";
+    css.minWidth = this.props.width;
     return css;
   };
 

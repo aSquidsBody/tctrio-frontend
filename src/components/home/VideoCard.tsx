@@ -23,6 +23,12 @@ class VideoCard extends Component<CardProps, {}> {
     if (this.props.style) {
       this.componentStyle = {
         ...this.props.style,
+        position: "relative",
+        zIndex: "0",
+        width: "100%",
+        background: BACKGROUND_GREY_GRADIENT,
+        borderRadius: "5px",
+        boxShadow: "0px 2px 10px 0px black",
       };
       this.componentStyle.height = this.componentStyle.height || "100%";
       this.componentStyle.width = this.componentStyle.width || "100%";
@@ -53,7 +59,7 @@ class VideoCard extends Component<CardProps, {}> {
           <div style={this.lineDiv}></div>
           {this.props.videos.map(({ id }) => {
             return (
-              <div style={this.videoDiv}>
+              <div style={this.videoDiv} key={"video" + id}>
                 <YoutubeVideo id={id}></YoutubeVideo>
               </div>
             );

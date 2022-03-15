@@ -1,4 +1,3 @@
-import { cp } from "fs/promises";
 import React, { Component } from "react";
 
 interface DropdownProps {
@@ -33,6 +32,7 @@ class Dropdown extends Component<DropdownProps, {}> {
     flexDirection: "column",
     alignItems: "center",
     width: "100%",
+    height: "100%",
   };
 
   labelStyle = (): React.CSSProperties => {
@@ -48,7 +48,7 @@ class Dropdown extends Component<DropdownProps, {}> {
 
   dropdown = (): React.CSSProperties => {
     return {
-      height: this.state.hover ? "600px" : "0px",
+      height: this.state.hover ? "100%" : "0px",
       transition: this.state.hover
         ? "height 0.3s ease-in"
         : "all 0.01s ease-out",
@@ -56,19 +56,56 @@ class Dropdown extends Component<DropdownProps, {}> {
     };
   };
 
+  arrowBox = (): React.CSSProperties => ({
+    position: "relative",
+    width: "30px",
+    height: "20px",
+    // background: "red",
+    margin: "auto",
+  });
+
+  leftArrow = (n: number): React.CSSProperties => ({
+    position: "absolute",
+    top: `calc(50% + ${n}px)`,
+    left: "3px",
+
+    height: this.state.hover ? "1px" : "2px",
+    width: `calc(${Math.sqrt(3) / 2} * 50%)`,
+    background: this.state.hover ? "gold" : "white",
+    boxShadow: "0px 1px 5px 0px black",
+    transform: "rotate(30deg)",
+  });
+
+  rightArrow = (n: number): React.CSSProperties => ({
+    position: "absolute",
+    top: `calc(50% + ${n}px)`,
+    right: "3px",
+
+    height: this.state.hover ? "1px" : "2px",
+    width: `calc(${Math.sqrt(3) / 2} * 50%)`,
+    background: this.state.hover ? "gold" : "white",
+    boxShadow: "0px 1px 5px 0px black",
+    transform: "rotate(-30deg)",
+  });
+
   render() {
     return (
       <div style={this.componentStyle}>
         <div style={this.contentDiv}>
-          <p
+          <div
             style={this.labelStyle()}
             className="noSelect"
             onMouseEnter={this.onEnter}
             onMouseLeave={this.onLeave}
           >
             {this.label}
-          </p>
-
+            <div style={this.arrowBox()}>
+              <div style={this.leftArrow(0)} />
+              <div style={this.rightArrow(0)} />
+              <div style={this.leftArrow(7)} />
+              <div style={this.rightArrow(7)} />
+            </div>
+          </div>
           <div
             style={this.dropdown()}
             onMouseEnter={this.onEnter}

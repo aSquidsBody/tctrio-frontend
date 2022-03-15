@@ -22,7 +22,8 @@ class ShowsCard extends Component<ShowsCardProps, {}> {
       ...props.style,
     };
 
-    this.componentStyle.background = BACKGROUND_GREY_GRADIENT;
+    this.componentStyle.background =
+      this.componentStyle.background || BACKGROUND_GREY_GRADIENT;
     this.componentStyle.fontFamily = "var(--alternate-font)";
     this.componentStyle.color = "white";
   }

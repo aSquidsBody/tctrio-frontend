@@ -5,7 +5,6 @@ import AddShow from "./AddShow";
 import ListShows from "./ListShows";
 import sharedStyles from "../styles/Manage.module.css";
 import styles from "./styles/ManageShows.module.css";
-import { authRequest } from "../../../pages/Admin/AuthRoute";
 
 interface Show {
   id: number;
@@ -24,7 +23,7 @@ interface AddShowType {
   description?: string;
 }
 
-class ManageShows extends Component<{ setAuth: (auth: boolean) => void }, {}> {
+class ManageShows extends Component {
   state = {
     errText: "",
     fetchError: null,
@@ -51,15 +50,9 @@ class ManageShows extends Component<{ setAuth: (auth: boolean) => void }, {}> {
 
   addShow = async (show: AddShowType) => {
     try {
-      const res = await authRequest(() =>
-        axios.post<{ shows: Show[] }>(SHOWS_URL, show, {
-          withCredentials: true,
-        })
-      );
-      if (!res) {
-        this.props.setAuth(false);
-        return;
-      }
+      const res = await axios.post<{ shows: Show[] }>(SHOWS_URL, show, {
+        withCredentials: true,
+      });
       if (!(res.data?.shows?.length >= 1)) return;
       const added = res.data.shows[0];
       this.state.shows.push(added);
@@ -69,13 +62,9 @@ class ManageShows extends Component<{ setAuth: (auth: boolean) => void }, {}> {
 
   deleteShow = async (id: number) => {
     try {
-      const res = await authRequest(() =>
-        axios.delete(SHOWS_URL + `/${id}`, { withCredentials: true })
-      );
-      if (!res) {
-        this.props.setAuth(false);
-        return;
-      }
+      await axios.delete(SHOWS_URL + `/${id}`, {
+        withCredentials: true,
+      });
     } catch (err: any) {}
     const shows = this.state.shows.filter((show) => show.id !== id);
     this.setState({ shows });

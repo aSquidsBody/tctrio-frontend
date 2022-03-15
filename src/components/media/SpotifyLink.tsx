@@ -14,7 +14,9 @@ class SpotifyLink extends Component<{ url: string }, {}> {
           target="_blank"
           rel="noreferrer"
           className={styles.link}
-        ></a>
+        >
+          {""}
+        </a>
       </div>
     );
   }

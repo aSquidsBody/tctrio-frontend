@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-
-import VideoCard from "./VideoCard";
-import MusicCard from "./MusicCard";
-import ShowsCard from "./ShowsCard";
-import Dropdown from "./Dropdown";
-
+import { POP_OUT_COLOR_SCHEME } from "../../config";
 import { Show } from "../../types/show";
 import { Track } from "../../types/spotify";
 import { Video } from "../../types/youtube";
+import Dropdown from "./Dropdown";
+import MusicCard from "./MusicCard";
+import ShowsCard from "./ShowsCard";
+import VideoCard from "./VideoCard";
 
 interface DropdownListProps {
   videos: Video[];
@@ -33,6 +32,7 @@ class DropdownList extends Component<DropdownListProps, {}> {
     flexDirection: "row",
     justifyContent: "center",
     width: "100%",
+    height: "calc(100vh - 150px - var(--menu-height)",
   };
 
   dropdownStyle: React.CSSProperties = {
@@ -42,11 +42,13 @@ class DropdownList extends Component<DropdownListProps, {}> {
   musicCard: React.CSSProperties = {
     width: "450px",
     borderRadius: "10px",
+    background: POP_OUT_COLOR_SCHEME ? "#121111" : undefined,
   };
 
   showsCard: React.CSSProperties = {
     width: "350px",
     borderRadius: "10px",
+    background: POP_OUT_COLOR_SCHEME ? "#121111" : undefined,
   };
 
   render() {

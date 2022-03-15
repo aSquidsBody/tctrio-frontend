@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { BACKGROUND_GREY, BACKGROUND_GREY_GRADIENT } from "../../config";
+import { MOBILE_HOME_COLOR } from "../../config";
 import { Show } from "../../types/show";
 import { Track } from "../../types/spotify";
 import { Video } from "../../types/youtube";
+import { ShowsList } from "../about/ShowsList";
+import CustomHeader from "../CustomHeader";
 import Socials from "../Socials";
-import Logo from "./Logo";
 import MusicCard from "./MusicCard";
 import NarrowVideos from "./NarrowVideos";
 
@@ -39,12 +39,12 @@ class NarrowContents extends Component<NarrowProps, {}> {
     fontFamily: "var(--body-font)",
     fontSize: "2rem",
     lineHeight: "3rem",
-    background: BACKGROUND_GREY,
-    color: "white",
+    // background: MOBILE_HOME_COLOR,
+    // color: "white",
   };
 
   musicDividerBox: React.CSSProperties = {
-    background: BACKGROUND_GREY,
+    // background: MOBILE_HOME_COLOR,
     height: "8px",
     width: "100%",
     padding: "3px 0px 16px 0px",
@@ -64,73 +64,59 @@ class NarrowContents extends Component<NarrowProps, {}> {
     alignItems: "center",
   };
 
-  showLine: React.CSSProperties = {
-    height: "2px",
-    margin: "20px auto",
-    width: "60%",
-    background: BACKGROUND_GREY_GRADIENT,
-    opacity: 0.5,
+  musicWrapper: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   };
-
-  showsLabel = (): React.CSSProperties => {
-    return {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "var(--primary-color)",
-      height: "48px",
-      width: "291px",
-      opacity: this.state.hover === "shows" ? 0.9 : 1,
-      transition:
-        this.state.hover === "shows" ? "opacity 0.05s" : "opacity 0.02s",
-      boxShadow: "2px 2px 10px 0px black",
-    };
-  };
-
-  showsLink: React.CSSProperties = {
-    color: "white",
-    fontFamily: "var(--body-font)",
-    fontSize: "2rem",
-  };
-
-  musicWrapper: React.CSSProperties = {};
 
   musicCard: React.CSSProperties = {
-    width: "100%",
-    background: BACKGROUND_GREY,
+    width: "98%",
+    // borderRadius: "10px",
+    paddingTop: "10px",
+    background: "#404040",
   };
 
-  videoWrapper: React.CSSProperties = {};
+  videoWrapper: React.CSSProperties = {
+    borderBottom: "solid 8px var(--primary-color)",
+  };
 
   videoDividerBox: React.CSSProperties = {
     ...this.musicDividerBox,
-    background: BACKGROUND_GREY,
-  };
-
-  videoLabel: React.CSSProperties = {
-    textAlign: "center",
-    fontFamily: "var(--body-font)",
-    fontSize: "2rem",
-    lineHeight: "3rem",
-    background: BACKGROUND_GREY,
-    color: "white",
-    paddingTop: "27px",
+    background: MOBILE_HOME_COLOR,
   };
 
   narrowVidDiv: React.CSSProperties = {
-    background: BACKGROUND_GREY,
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
+
+  vidBlue: React.CSSProperties = {
+    position: "absolute",
+    height: "110px",
+    width: "100%",
+    top: "30px",
+    left: "0px",
+    background: "var(--primary-color)",
   };
 
   socialsWrapper: React.CSSProperties = {
-    background: BACKGROUND_GREY_GRADIENT,
-    padding: "0px",
+    position: "relative",
+    width: "90%",
+    height: "1px",
+    margin: "0px auto",
   };
 
-  socialsLabel: React.CSSProperties = {
-    ...this.videoLabel,
-    background: "none",
-    lineHeight: "1.7rem",
-    padding: "32px 0px 10px 0px",
+  socialsPositioning: React.CSSProperties = {
+    position: "absolute",
+    width: "100%",
+    top: "-45px",
+    background: "var(--primary-color)",
+    borderRadius: "10px",
+    opacity: 0.9,
+    boxShadow: "3px 3px 25px 4px black",
   };
 
   socialsDividerBox: React.CSSProperties = {
@@ -143,48 +129,43 @@ class NarrowContents extends Component<NarrowProps, {}> {
     flexDirection: "row",
     justifyContent: "center",
     paddingBottom: "10px",
+    paddingTop: "10px",
   };
 
   render() {
     return (
       <div style={this.componentStyle}>
-        <div style={this.showsWrapper}>
-          <div style={this.showLine} />
-          <Logo style={{ marginBottom: "20px", maxWidth: "500px" }}></Logo>
-          <div
-            style={this.showsLabel()}
-            onMouseEnter={() => this.setState({ hover: "shows" })}
-            onMouseLeave={() => this.setState({ hover: "" })}
-          >
-            <Link to={"/About"} style={this.showsLink}>
-              View Upcoming Shows
-            </Link>
+        <div style={this.socialsWrapper}>
+          <div style={this.socialsPositioning}>
+            <Socials style={this.socialsStyle} />
           </div>
-          <div style={this.showLine} />
         </div>
         <div style={this.musicWrapper}>
-          <div style={this.musicLabel}>New Music</div>
-          <div style={this.musicDividerBox}>
-            <div style={this.musicDivider}></div>
-          </div>
+          <CustomHeader value="New Music" color="black" margin={40} />
           <MusicCard tracks={this.props.tracks} style={this.musicCard} />
         </div>
-
         <div style={this.videoWrapper}>
-          <div style={this.videoLabel}>New Music Videos</div>
-          <div style={this.videoDividerBox}>
-            <div style={this.musicDivider} />
-          </div>
           <div style={this.narrowVidDiv}>
-            <NarrowVideos videos={this.props.videos} />
+            <div style={this.vidBlue} />
+            <CustomHeader value="New Music Videos" color="white" margin={40} />
+            <NarrowVideos
+              videos={this.props.videos}
+              style={{
+                width: "98%",
+              }}
+            />
           </div>
         </div>
-        <div style={this.socialsWrapper}>
-          <p style={this.socialsLabel}>Follow Me</p>
-          <div style={this.socialsDividerBox}>
-            <div style={this.musicDivider} />
-          </div>
-          <Socials style={this.socialsStyle} />
+        <div style={this.showsWrapper}>
+          <CustomHeader value="Upcoming Shows" margin={40} />
+          <ShowsList
+            title={""}
+            showsList={this.props.shows}
+            alt={false}
+            style={{
+              width: "98%",
+            }}
+          ></ShowsList>
         </div>
       </div>
     );

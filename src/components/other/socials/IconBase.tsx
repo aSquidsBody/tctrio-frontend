@@ -61,7 +61,9 @@ class IconBase extends Component<IconProps, {}> {
             style={this.linkStyle}
             onMouseEnter={() => this.setState({ hover: true })}
             onMouseLeave={() => this.setState({ hover: false })}
-          ></a>
+          >
+            {""}
+          </a>
           <img src={this.src} alt="Facebook Logo" style={this.iconStyle()} />
         </div>
       </div>

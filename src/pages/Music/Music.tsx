@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Body from "../Body";
 import { Desktop } from "../../components/other/Responsive";
 import Banner from "../../components/other/Banner";
 import AlbumGrid from "../../components/media/AlbumGrid";
@@ -45,46 +44,81 @@ class Music extends Component {
 
   componentDidMount = async () => {
     pageview(window.location.pathname);
+
+    window.scrollTo(0, 0);
+
     await this.fetchAlbums();
     await this.fetchVideos();
   };
 
+  videoHeaderDiv: React.CSSProperties = {
+    width: "100%",
+    paddingBottom: "20px",
+  };
+
+  videoHeaderOverlayDiv: React.CSSProperties = {
+    position: "relative",
+    width: "0px",
+    height: "0px",
+    margin: "0px auto",
+    zIndex: -1,
+    overflowY: "visible",
+  };
+
+  videoHeaderOverlay: React.CSSProperties = {
+    position: "absolute",
+    width: "100vw",
+    height: "190px",
+    top: "-170px",
+    left: "-50vw",
+    background: "var(--primary-color)",
+    opacity: "0.9",
+    mixBlendMode: "multiply",
+    zIndex: -1,
+  };
+
   render() {
     return (
-      <Body page="Music">
-        <div className={styles.component}>
-          <Desktop>
-            <div className={styles.banner}>
-              <Banner img={devicesBanner} width="2000px" top="-50px" />
-            </div>
-          </Desktop>
-          <div className="container">
-            <section className={styles.albums}>
-              <CustomHeader value={"Discography"} />
-              {this.state.albums.length ? (
-                <div>
-                  <AlbumGrid albums={this.state.albums} />
-                </div>
-              ) : null}
-            </section>
-            <section className={styles.videos}>
+      <div className={styles.component}>
+        <Desktop>
+          <div
+            className={styles.banner}
+            style={{ width: "100%", overflowX: "hidden" }}
+          >
+            <Banner img={devicesBanner} width="2000px" top="-50px" />
+          </div>
+        </Desktop>
+        <div className="container">
+          <section className={styles.albums}>
+            <CustomHeader value={"Discography"} />
+            {this.state.albums.length ? (
+              <div>
+                <AlbumGrid albums={this.state.albums} />
+              </div>
+            ) : null}
+          </section>
+          <section className={styles.videos}>
+            <div style={this.videoHeaderDiv}>
               <CustomHeader
                 value={"Youtube Videos"}
                 color={"var(--white-color)"}
               />
-              {this.state.videos.length !== 0 ? (
-                <div
-                  style={{
-                    paddingBottom: "15px",
-                  }}
-                >
-                  <YoutubeGrid videos={this.state.videos} />
-                </div>
-              ) : null}
-            </section>
-          </div>
+              <div style={this.videoHeaderOverlayDiv}>
+                <div style={this.videoHeaderOverlay} />
+              </div>
+            </div>
+            {this.state.videos.length !== 0 ? (
+              <div
+                style={{
+                  paddingBottom: "15px",
+                }}
+              >
+                <YoutubeGrid videos={this.state.videos} />
+              </div>
+            ) : null}
+          </section>
         </div>
-      </Body>
+      </div>
     );
   }
 }

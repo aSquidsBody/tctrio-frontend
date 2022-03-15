@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { Component } from "react";
-import { event } from "react-ga";
 import facebookBlack from "../../assets/Facebook_Black.png";
 import instagramBlack from "../../assets/Instagram_Black.png";
 import twitterBlack from "../../assets/Twitter_Black.png";

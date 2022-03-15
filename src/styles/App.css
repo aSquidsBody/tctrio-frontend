@@ -33,8 +33,10 @@
   --menu-height: 60px;
 
   --primary-color: #1c2434;
+  --color: #27324b;
+  --primary-gradient: linear-gradient(0.85turn, #1c2435e0, #090c11d5);
   --selected-color: #66ffff;
-
+  --spotify-green: #1db954;
   --gold-gradient: linear-gradient(0.2turn, gold, 3%, goldenrod, 97%, gold);
 
   --menu-speed: 0.75s;
@@ -49,15 +51,11 @@
   --white: #f4f4f4;
   --black: #000;
 
-  --spotify-grey: rgb(62, 62, 63);
-
-  --spotify-green: rgb(30, 215, 96);
-  --spotify-gradient: linear-gradient(
-    0.25turn,
-    var(--spotify-green),
-    var(--spotify-grey)
+  --grey-gradient: linear-gradient(
+    0.15turn,
+    rgba(34, 34, 34, 0.9),
+    rgba(27, 27, 27, 0.95)
   );
-
   --desktop-album-width: 260px;
   --mobile-album-width: 160px;
 
@@ -76,29 +74,6 @@
 a {
   color: inherit;
   text-decoration: none;
-}
-
-.body {
-  position: relative;
-  min-height: calc(100vh - var(--menu-height));
-  width: 100%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  background: linear-gradient(0.3turn, var(--white-color), var(--bwite-color));
-  mix-blend-mode: difference;
-}
-
-.body::before {
-  content: "";
-  position: absolute;
-  display: block;
-  background-image: url("../assets/logo_black.png");
-  background-size: 33%;
-  opacity: 0.03;
-  transform: rotate(5deg);
-  height: 100%;
-  width: 100%;
-  /* z-index: -1; */
 }
 
 @media screen and (max-width: 650px) {
@@ -217,6 +192,11 @@ a {
   visibility: visible;
 }
 
-.volumeSlider::-moz-range-thumb,
-.volumeSlider::-webkit-slider-thumb {
+@keyframes spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }

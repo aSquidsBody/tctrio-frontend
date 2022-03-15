@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { ABOUT_URL } from "../../config";
-import { authRequest } from "../../pages/Admin/AuthRoute";
 
 import sharedStyles from "./styles/Manage.module.css";
 import styles from "./styles/ManageBio.module.css";
 
-class ManageBio extends Component<{ setAuth: (auth: boolean) => void }, {}> {
+class ManageBio extends Component {
   state = {
     bio: "",
     updateBio: "",
@@ -37,21 +36,16 @@ class ManageBio extends Component<{ setAuth: (auth: boolean) => void }, {}> {
     }
 
     try {
-      const res = await authRequest(() =>
-        axios.put<{ text: string }>(
-          ABOUT_URL,
-          {
-            text: this.state.updateBio,
-          },
-          {
-            withCredentials: true,
-          }
-        )
+      const res = await axios.put<{ text: string }>(
+        ABOUT_URL,
+        {
+          text: this.state.updateBio,
+        },
+        {
+          withCredentials: true,
+        }
       );
-      if (!res) {
-        this.props.setAuth(false);
-        return;
-      }
+
       const updatedBio = res.data.text;
 
       this.setState({

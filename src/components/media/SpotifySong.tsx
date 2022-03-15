@@ -1,10 +1,8 @@
+import { faPauseCircle, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
-import axios from "axios";
 import { Track } from "../../types/spotify";
 import SpotifyLink from "./SpotifyLink";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle, faPauseCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface SpotifySongProps {
   track: Track;

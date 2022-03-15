@@ -1,12 +1,18 @@
-const local = "http://localhost:3000";
+// const local = "http://localhost:3000";
 
 const url = function (path: string) {
-  return local + path;
-  // return path;
+  // return local + path;
+  return path;
 };
+
+export const ORIGINAL = false;
+export const POP_OUT = false;
+export const POP_OUT_COLOR_SCHEME = false;
 
 export const NAV_ELEMS_WIDTH = 340; // px
 export const BACKGROUND_GREY = "#303030";
+export const MUSIC_CARD_COLOR = BACKGROUND_GREY;
+export const MOBILE_HOME_COLOR = "#a4a4a4";
 export const BACKGROUND_GREY_GRADIENT =
   "linear-gradient(0.35turn, #404040, 3%, #303030, 85%, #404040)";
 // export const BACKGROUND_GREY = "var(--primary-color)";
@@ -38,10 +44,13 @@ export const CURRENT_USER = url("/api/users/current-user");
 export const UPDATE_USER = url("/api/users/update");
 export const LOGIN_URL = url("/api/users/signin");
 export const LOGOUT_URL = url("/api/users/signout");
+export const SIGNUP_URL = url("/api/users/signup");
+export const EXTEND_SESSION_URL = url("/api/users/extend-session");
 export const LOCAL_STORAGE = {
   LOGGED_IN: "tctrioLoggedIn",
   EXPIRATION: "tctrioExpires",
 };
+export const LOGIN_ROUTE = "login";
 
 export const MOBILEWIDTH = 650; // pixels
 

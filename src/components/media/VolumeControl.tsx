@@ -15,7 +15,7 @@ const HANDLE_RADIUS = 7;
 const MAX_LEVEL = 100;
 const MAX_VOLUME = 0.7;
 const INITIAL_LEVEL = 50;
-const LOG_BASE = 40;
+// const LOG_BASE = 40;
 
 // volumeFunc maps [0, MAX_LEVEL] to [0, 1]
 function volumeFunc(x: number) {
@@ -28,16 +28,16 @@ function expVolume(x: number) {
   return Math.max(Math.min(volume, MAX_VOLUME), 0);
 }
 
-const log = (x: number) => {
-  return Math.log(x) / Math.log(LOG_BASE);
-};
-const doubleLog = (x: number) => log(log(x));
+// const log = (x: number) => {
+//   return Math.log(x) / Math.log(LOG_BASE);
+// };
+// const doubleLog = (x: number) => log(log(x));
 
-const logVolume = (x: number) => {
-  const dLog = doubleLog(x + LOG_BASE) / doubleLog(MAX_LEVEL + LOG_BASE);
+// const logVolume = (x: number) => {
+//   const dLog = doubleLog(x + LOG_BASE) / doubleLog(MAX_LEVEL + LOG_BASE);
 
-  return Math.max(Math.min(dLog, MAX_LEVEL), 0);
-};
+//   return Math.max(Math.min(dLog, MAX_LEVEL), 0);
+// };
 
 class VolumeControl extends Component<VolumeProps, {}> {
   handleRef: React.RefObject<HTMLDivElement>;
@@ -99,7 +99,6 @@ class VolumeControl extends Component<VolumeProps, {}> {
     if (!this.playerRef.current) {
       return;
     }
-    console.log(level, volumeFunc(level));
     this.playerRef.current.volume = volumeFunc(level);
     this.setState({ level, muted: level <= 0 });
   };
@@ -136,9 +135,25 @@ class VolumeControl extends Component<VolumeProps, {}> {
     this.setState({ selected: true });
   };
 
+  touchSelect = (e: React.TouchEvent<HTMLDivElement>) => {
+    this.setTouchPosition(e);
+    document.ontouchend = this.notTouchSelect;
+    document.ontouchmove = this.touchSlide;
+    console.log("Select");
+    this.setState({ selected: true });
+  };
+
   notSelect = () => {
     document.onmouseup = null;
     document.onmousemove = null;
+    this.setState({ selected: undefined });
+  };
+
+  notTouchSelect = () => {
+    console.log("De-select");
+
+    document.ontouchend = null;
+    document.ontouchmove = null;
     this.setState({ selected: undefined });
   };
 
@@ -147,6 +162,11 @@ class VolumeControl extends Component<VolumeProps, {}> {
     clearSelection();
 
     this.setPosition(e);
+  };
+
+  touchSlide = (e: TouchEvent) => {
+    console.log("slide");
+    this.setTouchPosition(e);
   };
 
   setPosition = (
@@ -163,6 +183,28 @@ class VolumeControl extends Component<VolumeProps, {}> {
 
     var mousePixel = Math.min(
       Math.max(e.clientX - bounds.left - HANDLE_RADIUS, -HANDLE_RADIUS),
+      selector.clientWidth - HANDLE_RADIUS
+    );
+
+    handle.style.left = `${mousePixel}px`;
+    this.setVolume(this.pixel2volume(mousePixel));
+  };
+
+  setTouchPosition = (e: TouchEvent | React.TouchEvent<HTMLDivElement>) => {
+    if (!this.handleRef.current || !this.selectorRef.current) {
+      return;
+    }
+    const handle = this.handleRef.current;
+    const selector = this.selectorRef.current;
+
+    const target = selector as HTMLElement; // Need to get bounding box
+    const bounds = target.getBoundingClientRect();
+
+    var mousePixel = Math.min(
+      Math.max(
+        e.touches[0].clientX - bounds.left - HANDLE_RADIUS,
+        -HANDLE_RADIUS
+      ),
       selector.clientWidth - HANDLE_RADIUS
     );
 
@@ -283,6 +325,7 @@ class VolumeControl extends Component<VolumeProps, {}> {
               onMouseLeave={this.notHover}
               onMouseDown={this.select}
               onMouseUp={this.notSelect}
+              onTouchStart={this.touchSelect}
             >
               <div style={this.slider}>
                 <div style={this.leftBar()}></div>
@@ -291,7 +334,7 @@ class VolumeControl extends Component<VolumeProps, {}> {
             </div>
           </div>
           <FontAwesomeIcon
-            icon={this.state.level == 0 ? faVolumeMute : faVolumeUp}
+            icon={this.state.level === 0 ? faVolumeMute : faVolumeUp}
             color={this.state.muteHover ? "white" : "#ddd"}
             style={this.iconStyle}
             onMouseEnter={() => this.setState({ muteHover: true, hover: true })}

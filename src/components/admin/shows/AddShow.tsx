@@ -30,7 +30,7 @@ class AddShow extends Component<
       const show = {
         name: this.state.newName || undefined,
         date: this.state.newDate
-          ? new Date(this.state.newDate).toISOString()
+          ? dateHelper(new Date(this.state.newDate)).toISOString()
           : undefined,
         location: this.state.newLocation || undefined,
         time: this.state.newTime || undefined,
@@ -135,6 +135,11 @@ class AddShow extends Component<
       </div>
     );
   }
+}
+
+function dateHelper(d: Date) {
+  d.setHours(d.getHours() + 6);
+  return d;
 }
 
 export default AddShow;

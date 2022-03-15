@@ -1,4 +1,9 @@
-const PAGES = [
+export interface Page {
+  name: string;
+  endpoint: string;
+}
+
+export const PAGES: Page[] = [
   {
     name: "Home",
     endpoint: "/",
@@ -16,5 +21,3 @@ const PAGES = [
     endpoint: "/contact",
   },
 ];
-
-export { PAGES };

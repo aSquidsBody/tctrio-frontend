@@ -1,15 +1,13 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { pageview } from "react-ga";
-import bandImage from "../../assets/band3.png";
-import bandBanner from "../../assets/band3_flat2.png";
-
+import { useMediaQuery } from "react-responsive";
+import loadingImg from "../../assets/loading.png";
+import wallImg from "../../assets/tyler_wall.jpg";
 import DropdownList from "../../components/home/DropdownList";
 import NarrowContents from "../../components/home/NarrowContents";
-import Banner from "../../components/other/Banner";
+import { Custom } from "../../components/other/Responsive";
 import {
-  BACKGROUND_GREY,
-  BACKGROUND_GREY_GRADIENT,
   MUSIC_HIGHLIGHTS_URL,
   SHOWS_URL,
   VIDEO_HIGHLIGHTS_URL,
@@ -17,95 +15,124 @@ import {
 import { Show } from "../../types/show";
 import { Playlist as SpotifyPlaylist, Track } from "../../types/spotify";
 import { Playlist as YoutubePlaylist, Video } from "../../types/youtube";
-import Body from "../Body";
-import { Custom } from "../../components/other/Responsive";
-import Socials from "../../components/Socials";
 
-const Mobile = Custom({ maxWidth: 1185 });
-const Desktop = Custom({ minWidth: 1185 });
+const customMobile = 1185;
+const AllMobile = Custom({ maxWidth: customMobile });
+const Desktop = Custom({ minWidth: customMobile });
 
-class Home extends Component {
+function Home() {
   // when component mounts, load in media ids from database (no loading in the sub-components)
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [shows, setShows] = useState<Show[]>([]);
+  const [loaded, setLoaded] = useState(false); // image loaded
 
-  state: {
-    tracks: Track[];
-    videos: Video[];
-    shows: Show[];
-    hover: string;
-  };
-
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      tracks: [],
-      videos: [],
-      hover: "",
-      shows: [],
-    };
-  }
-
-  fetchData = async () => {
+  async function fetchData() {
     try {
       const res = await axios.get<{ playlist: SpotifyPlaylist }>(
         MUSIC_HIGHLIGHTS_URL
       );
-      this.setState({ tracks: res.data.playlist.tracks });
-    } catch (_) {}
+      setTracks(res.data.playlist.tracks);
+    } catch (err: any) {
+      console.error(err);
+    }
     try {
       const res = await axios.get<{ playlist: YoutubePlaylist }>(
         VIDEO_HIGHLIGHTS_URL
       );
-      this.setState({ videos: res.data.playlist.videos });
-    } catch (_) {}
+      setVideos(res.data.playlist.videos);
+    } catch (err: any) {
+      console.error(err);
+    }
     try {
       const res = await axios.get<{ upcomingShows: Show[]; pastShows: Show[] }>(
         SHOWS_URL
       );
-      this.setState({ shows: res.data.upcomingShows });
-    } catch (_) {}
-  };
+      setShows(res.data.upcomingShows);
+    } catch (err: any) {
+      console.error(err);
+    }
+  }
 
-  componentDidMount = async () => {
+  useEffect(() => {
     pageview(window.location.pathname);
+    window.scrollTo(0, 0);
 
-    await this.fetchData();
-  };
+    fetchData();
+  }, []);
 
-  onEnter = (hover: string) => {
-    return () => {
-      this.setState({ hover });
-    };
-  };
-
-  onLeave = () => {
-    this.setState({ hover: "" });
-  };
-
-  componentDidUpdate() {}
-  pageStyle: React.CSSProperties = {
+  // styles
+  const globalStyle: React.CSSProperties = {
     position: "relative",
-    height: "calc(100vh - var(--menu-height))",
     width: "100vw",
-    maxWidth: "100vw",
-    overflowY: "auto",
+    height: useMediaQuery({ minWidth: customMobile })
+      ? "calc(100vh - var(--menu-height))"
+      : "auto",
+  };
+
+  const pageStyle: React.CSSProperties = {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    margin: "auto",
     zIndex: 0,
   };
 
-  backgroundImage: React.CSSProperties = {
+  const desktopStyle: React.CSSProperties = {
+    display: loaded ? "" : "none",
+  };
+
+  const loadingThing: React.CSSProperties = {
+    display: loaded ? "none" : "flex",
+    background: "var(--primary-color)",
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "var(--white-color)",
+    fontFamily: "var(--header-font)",
+    fontSize: "2rem",
+    opacity: 0.7,
+  };
+
+  const loadingImgStyle: React.CSSProperties = {
+    margin: "10px",
+    width: "100%",
+    maxWidth: "80px",
+    animation: "spin 14s linear infinite",
+  };
+
+  const desktopImageWrapper: React.CSSProperties = {
+    position: "relative",
+    height: "calc(100vh - var(--menu-height))",
+    overflowY: "hidden",
+  };
+
+  const backgroundImage: React.CSSProperties = {
+    display: loaded ? "" : "",
     position: "absolute",
     top: "0px",
     left: `0px`,
-    height: "100%",
+    height: "140%",
     width: "100%",
-    backgroundImage: "url(" + bandImage + ")",
-    backgroundRepeat: "repeat",
-    backgroundPosition: "center",
     filter: "grayscale(40%)",
+    objectFit: "cover",
+    backgroundRepeat: "no-repeat",
     zIndex: -2,
   };
 
-  backgroundColor: React.CSSProperties = {
+  const mobileQuery = useMediaQuery({ maxWidth: 866 });
+
+  const mobileImage: React.CSSProperties = {
+    ...backgroundImage,
+    height: mobileQuery ? "100%" : "160%",
+    left: "-80px",
+    width: "125%",
+    top: "0%",
+  };
+
+  const backgroundColor: React.CSSProperties = {
     position: "absolute",
     top: "0px",
     left: `0px`,
@@ -113,26 +140,40 @@ class Home extends Component {
     width: "100%",
     background: "var(--primary-color)",
     opacity: 0.26,
+    mixBlendMode: "multiply",
   };
 
-  bannerWrapper: React.CSSProperties = {
+  const bannerWrapper: React.CSSProperties = {
     position: "relative",
     width: "100%",
-    height: "280px",
+    height: "433px",
+    overflowY: "hidden",
   };
 
-  narrowStyle: React.CSSProperties = {
-    background: "rgb(0, 0, 0, 0.18)",
-  };
+  const narrowStyle: React.CSSProperties = {};
 
-  render() {
-    return (
-      <Body page="Home">
-        <div style={this.pageStyle}>
-          <Desktop>
-            <>
-              <div style={this.backgroundImage}></div>
-              <div style={this.backgroundColor}></div>
+  return (
+    <div style={globalStyle}>
+      <div style={pageStyle}>
+        <Desktop>
+          <>
+            <div style={loadingThing}>
+              <img src={loadingImg} alt="Loading" style={loadingImgStyle} />
+              ...Loading Image...
+            </div>
+            <div style={desktopStyle}>
+              <div style={desktopImageWrapper}>
+                <img
+                  style={backgroundImage}
+                  src={wallImg}
+                  alt="Background"
+                  onLoad={() => {
+                    setLoaded(true);
+                  }}
+                />
+                <div style={backgroundColor}></div>
+              </div>
+
               <DropdownList
                 style={{
                   position: "absolute",
@@ -141,35 +182,49 @@ class Home extends Component {
                   width: "100%",
                   zIndex: "1",
                 }}
-                tracks={this.state.tracks}
-                videos={this.state.videos}
-                shows={this.state.shows}
+                tracks={tracks}
+                videos={videos}
+                shows={shows}
               />
-            </>
-          </Desktop>
-          <Mobile>
-            <>
-              {/* <div style={this.bannerWrapper}>
-                <Banner
-                  img={bandBanner}
-                  height="280px"
-                  width={"1920px"}
-                  left="-120px"
+            </div>
+          </>
+        </Desktop>
+
+        {/* Mobile is defined wider than other pages due to dropdown issues */}
+        <AllMobile>
+          <>
+            <div style={bannerWrapper}>
+              <div style={{ display: loaded ? "none" : "", height: "100%" }}>
+                <div style={loadingThing}>
+                  <img src={loadingImg} alt="" style={loadingImgStyle} />
+                  ...Loading Image...
+                </div>
+              </div>
+              <div style={{ display: loaded ? "" : "none" }}>
+                <img
+                  style={mobileImage}
+                  src={wallImg}
+                  alt="Background"
+                  onLoad={() => {
+                    setLoaded(true);
+                  }}
                 />
-                <div style={this.backgroundColor}></div>
-              </div> */}
-              <NarrowContents
-                tracks={this.state.tracks}
-                videos={this.state.videos}
-                shows={this.state.shows}
-                style={this.narrowStyle}
-              />
-            </>
-          </Mobile>
-        </div>
-      </Body>
-    );
-  }
+              </div>
+
+              <div style={backgroundColor}></div>
+            </div>
+
+            <NarrowContents
+              tracks={tracks}
+              videos={videos}
+              shows={shows}
+              style={narrowStyle}
+            />
+          </>
+        </AllMobile>
+      </div>
+    </div>
+  );
 }
 
 export default Home;

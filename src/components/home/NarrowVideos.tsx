@@ -42,6 +42,7 @@ class NarrowVideos extends Component<NarrowVideosProps, {}> {
 
   liStyle: React.CSSProperties = {
     width: "100%",
+    listStyle: "none",
   };
 
   render() {

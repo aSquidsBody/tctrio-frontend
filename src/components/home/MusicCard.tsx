@@ -4,6 +4,7 @@ import SpotifySong from "../media/SpotifySong";
 import ScrollBox from "../other/Scrollbox";
 import VolumeControl from "../media/VolumeControl";
 import { BACKGROUND_GREY_GRADIENT } from "../../config";
+import { Desktop, Mobile } from "../other/Responsive";
 
 interface CardProps {
   tracks: Track[];
@@ -90,9 +91,7 @@ class MusicCard extends Component<CardProps, {}> {
   };
 
   // styles
-  listDiv: React.CSSProperties = {
-    maxHeight: "350px",
-  };
+  listDiv: React.CSSProperties = {};
 
   volumeDiv: React.CSSProperties = {
     padding: "30px 30px 30px 30px",
@@ -118,9 +117,9 @@ class MusicCard extends Component<CardProps, {}> {
         <audio ref={this.playerRef}>
           <source src={this.state.src} type="audio/mpeg" />
         </audio>
-        <div style={this.listDiv}>
+        <Desktop>
           <ScrollBox style={this.scrollBox}>
-            {this.props.tracks.slice(0, 2).map((track) => {
+            {this.props.tracks.map((track) => {
               return (
                 <div style={this.spotifySongDiv} key={"highlight" + track.id}>
                   <SpotifySong
@@ -134,7 +133,24 @@ class MusicCard extends Component<CardProps, {}> {
               );
             })}
           </ScrollBox>
-        </div>
+        </Desktop>
+        <Mobile>
+          <ScrollBox>
+            {this.props.tracks.map((track) => {
+              return (
+                <div style={this.spotifySongDiv} key={"highlight" + track.id}>
+                  <SpotifySong
+                    track={track}
+                    play={this.play}
+                    pause={this.pause}
+                    playing={this.isPlaying(track.previewUrl)}
+                    name={this.state.src}
+                  />
+                </div>
+              );
+            })}
+          </ScrollBox>
+        </Mobile>
 
         <div style={this.divLine} />
         <div style={this.volumeDiv}>

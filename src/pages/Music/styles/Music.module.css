@@ -44,16 +44,16 @@
 .videos .bar {
   background: white;
 }
-
+/* 
 .videos::before {
   content: "";
   position: absolute;
-  width: 200%;
+  width: 100vw;
   height: 25%;
   top: 40px;
-  left: -50%;
+  left: 0%;
   background: var(--primary-color);
   opacity: 0.9;
   mix-blend-mode: multiply;
   z-index: -1;
-}
+} */

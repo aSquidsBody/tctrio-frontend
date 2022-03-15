@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-
-import { authRequest } from "../../pages/Admin/AuthRoute";
 import axios from "axios";
 
 import {
@@ -18,10 +16,7 @@ interface Playlist {
   name: string;
 }
 
-class ManageYoutube extends Component<
-  { setAuth: (auth: boolean) => void },
-  {}
-> {
+class ManageYoutube extends Component {
   state = {
     main: {
       id: "",
@@ -39,12 +34,12 @@ class ManageYoutube extends Component<
 
   fetchData = async () => {
     try {
-      const res = await authRequest(() =>
-        axios.get<{ playlists: Playlist[] }>(YOUTUBE_PLAYLISTS_URL, {
+      const res = await axios.get<{ playlists: Playlist[] }>(
+        YOUTUBE_PLAYLISTS_URL,
+        {
           withCredentials: true,
-        })
+        }
       );
-      if (!res) return this.props.setAuth(false);
 
       const main = res.data.playlists.filter(
         (playlist: Playlist) => playlist.name === MAIN_VIDEOS
@@ -80,12 +75,9 @@ class ManageYoutube extends Component<
       if (/.*youtube.com.*/.test(this.state.id)) body.newUrl = this.state.id;
       else body.newId = this.state.id;
       const res: { data: { playlists: [{ id: string; name: string }] } } =
-        await authRequest(() =>
-          axios.put(YOUTUBE_PLAYLISTS_URL, body, {
-            withCredentials: true,
-          })
-        );
-      if (!res) return this.props.setAuth(false);
+        await axios.put(YOUTUBE_PLAYLISTS_URL, body, {
+          withCredentials: true,
+        });
 
       if (this.state.name === HIGHLIGHT_VIDEOS) {
         this.state.highlights.id = res.data.playlists[0].id;

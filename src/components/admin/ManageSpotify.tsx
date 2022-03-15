@@ -6,7 +6,6 @@ import {
   SPOTIFY_PLAYLISTS_URL,
   HIGHLIGHT_SONGS,
 } from "../../config";
-import { authRequest } from "../../pages/Admin/AuthRoute";
 import TextInput from "./common/TextInput";
 import sharedStyles from "./styles/Manage.module.css";
 import styles from "./styles/ManageSpotify.module.css";
@@ -16,10 +15,7 @@ interface Playlist {
   id: string;
 }
 
-class ManageSpotify extends Component<
-  { setAuth: (auth: boolean) => void },
-  {}
-> {
+class ManageSpotify extends Component {
   state = {
     id: "",
 
@@ -34,12 +30,13 @@ class ManageSpotify extends Component<
   // Fetch playlists
   fetchData = async () => {
     try {
-      const res = await authRequest(() =>
-        axios.get<{ playlists: Playlist[] }>(SPOTIFY_PLAYLISTS_URL, {
+      const res = await axios.get<{ playlists: Playlist[] }>(
+        SPOTIFY_PLAYLISTS_URL,
+        {
           withCredentials: true,
-        })
+        }
       );
-      if (!res) return this.props.setAuth(false);
+
       if (res.data.playlists.length === 0) {
         console.error("Could not find playlist");
       }
@@ -62,12 +59,9 @@ class ManageSpotify extends Component<
       if (/.*spotify.com.*/.test(this.state.id)) body.newUrl = this.state.id;
       else body.newId = this.state.id;
       const res: { data: { playlists: [{ id: string; name: string }] } } =
-        await authRequest(() =>
-          axios.put(SPOTIFY_PLAYLISTS_URL, body, {
-            withCredentials: true,
-          })
-        );
-      if (!res) return this.props.setAuth(false);
+        await axios.put(SPOTIFY_PLAYLISTS_URL, body, {
+          withCredentials: true,
+        });
 
       this.setState({
         id: "",
@@ -84,12 +78,9 @@ class ManageSpotify extends Component<
 
   deletePlaylist = async (name: string) => {
     try {
-      const res = await authRequest(() =>
-        axios.delete(MUSIC_HIGHLIGHTS_URL + "/" + name, {
-          withCredentials: true,
-        })
-      );
-      if (!res) return this.props.setAuth(false);
+      await axios.delete(MUSIC_HIGHLIGHTS_URL + "/" + name, {
+        withCredentials: true,
+      });
 
       this.state.highlights.name = "";
       this.setState({});

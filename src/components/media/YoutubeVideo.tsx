@@ -1,4 +1,4 @@
-import React, { Component, IframeHTMLAttributes } from "react";
+import React, { Component } from "react";
 
 interface YoutubeVideoProps {
   id: string;

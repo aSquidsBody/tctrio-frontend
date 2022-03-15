@@ -8,7 +8,7 @@ export const Desktop = ({ children }: { children: JSX.Element }) => {
 };
 
 export const Mobile = ({ children }: { children: JSX.Element }) => {
-  const isMobile = useMediaQuery({ maxWidth: MOBILEWIDTH });
+  const isMobile = useMediaQuery({ maxWidth: MOBILEWIDTH - 1 });
   return isMobile ? children : null;
 };
 

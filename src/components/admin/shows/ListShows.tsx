@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { formatDate } from "../../../utils/formatter";
 import styles from "./styles/ListShows.module.css";
 
@@ -13,10 +12,12 @@ interface Show {
   description: string;
 }
 
-class ListShows extends Component<{
+interface ListShowsProps {
   shows: Show[];
   deleteShow: (id: number) => Promise<void>;
-}> {
+}
+
+class ListShows extends Component<ListShowsProps, {}> {
   state = {
     hover: -1,
     authorized: true,
@@ -30,9 +31,6 @@ class ListShows extends Component<{
   };
 
   render() {
-    if (!this.state.authorized) {
-      return <Redirect to="/login"></Redirect>;
-    }
     return (
       <div className={styles.component}>
         <div className={styles.showCol}>

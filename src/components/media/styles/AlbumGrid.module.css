@@ -27,13 +27,6 @@
   background: linear-gradient(0.25turn, var(--spotify-green), white);
 }
 
-@media screen and (max-width: 780px) {
-  .album {
-    height: auto;
-    width: 50%;
-    padding-bottom: 50%;
-  }
-}
 .album::before {
   content: "";
   position: absolute;
@@ -67,56 +60,4 @@
 .album:hover .albumInfo {
   opacity: 1;
   transition: opacity 1s;
-}
-
-.albumInfo {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  padding: 30px 20px 10% 20px;
-  opacity: 0;
-  z-index: 3;
-  transition: opacity 0.5s;
-  color: white;
-}
-
-.albumInfo p {
-  font-family: var(--body-font);
-  font-size: 1.5rem;
-  margin: 7px 0px;
-  padding-top: 20px;
-  padding-bottom: 5px;
-}
-
-.albumInfo h5 {
-  font-family: var(--alternate-font);
-  font-size: 1.75rem;
-  font-weight: lighter;
-  margin: 7px 0px;
-  border: solid 1px white;
-  min-width: 255px;
-  padding: 30px 10px;
-  text-align: center;
-}
-
-.cover {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  transition: transform 750ms cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.link {
-  position: relative;
-  z-index: 3;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
